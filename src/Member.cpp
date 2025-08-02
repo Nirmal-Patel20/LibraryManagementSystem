@@ -21,12 +21,10 @@ std::istream& operator>> (std::istream& is,Member& src){
     std::string line;
     if(std::getline(is,line)){
         std::istringstream iss (line);
-        std::string stringTo;
 
         std::getline(iss,src.m_name,',');
 
-        std::getline(iss,stringTo);
-        src.m_Member_ID = std::stoi(stringTo);
+        std::getline(iss,src.m_Member_ID);
     }
 
     return is;

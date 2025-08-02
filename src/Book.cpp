@@ -29,7 +29,21 @@ std::ostream& operator<< (std::ostream& os, const Book& src){
     return os;
 }
 
-std::istream& operator>> (std::istream& is, Book& src);
+std::istream& operator>> (std::istream& is, Book& src){
+    std::string line;
+    if(std::getline(is,line)){
+        std::stringstream iss(line);
+        std::string Stringto;
+
+        std::getline(iss,src.m_title,',');
+        std::getline(iss,src.m_author,',');
+        std::getline(iss,src.m_ID,',');
+        std::getline(iss,Stringto);
+
+        src.isBorrowed = (Stringto == "1");
+    }
+}
+
 void Book::display() const{
     std::cout << "Title : " << m_title << std::endl;
     std::cout << "Author : " << m_author << ", ID : " << m_ID << std::endl;
