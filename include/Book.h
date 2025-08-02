@@ -9,17 +9,17 @@
 class Book {
     std::string m_title{"none"};
     std::string m_author{"none"};
-    int m_ID{0};
+    std::string m_ID{0};
     bool isBorrowed = true;
 
 public : 
     Book () = default;
-    Book (std::string_view title, std::string_view author, int ID);
+    Book (std::string_view title, std::string_view author, std::string ID);
 
     //getters and setters
     std::string getTitle() const;
     std::string getAuthor() const;
-    int getID () const;
+    std::string getID () const;
     bool getBorrowedStatus () const;
     void setBorrowedStatus (bool status);
 

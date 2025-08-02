@@ -1,6 +1,6 @@
 #include "Book.h"
 
-Book::Book (std::string_view title, std::string_view author, int ID) : m_title(title), m_author(author), m_ID(ID) {
+Book::Book (std::string_view title, std::string_view author, std::string ID) : m_title(title), m_author(author), m_ID(ID) {
 
 }
 
@@ -12,7 +12,7 @@ std::string Book::getAuthor () const {
     return m_author;
 }
 
-int Book::getID () const {
+std::string Book::getID () const {
     return m_ID;
 }
 

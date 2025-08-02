@@ -1,6 +1,6 @@
 #include "Member.h"
 
-Member::Member (std::string_view name,int Member_ID) : m_name (name), m_Member_ID(Member_ID){
+Member::Member (std::string_view name,std::string Member_ID) : m_name (name), m_Member_ID(Member_ID){
 
 }
 
@@ -8,7 +8,7 @@ std::string Member::getName () const {
     return m_name;
 } 
 
-int Member::getID () const {
+std::string Member::getID () const {
     return m_Member_ID;
 }
 

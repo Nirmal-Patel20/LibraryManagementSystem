@@ -8,16 +8,16 @@
 
 
 class Member {
-    std::string m_name{"none"};
-    int m_Member_ID{0};
+    std::string m_name{"None"};
+    std::string m_Member_ID{"None"};
 
 public : 
     Member () = default;
-    Member (std::string_view name,int Member_ID);
+    Member (std::string_view name,std::string Member_ID);
 
     //getters
     std::string getName () const;
-    int getID() const;
+    std::string getID() const;
 
     //I/O
     friend std::ostream& operator<< (std::ostream& os,const Member& src);
