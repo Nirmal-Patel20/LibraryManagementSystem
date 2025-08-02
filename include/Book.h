@@ -9,7 +9,7 @@
 class Book {
     std::string m_title{"none"};
     std::string m_author{"none"};
-    std::string m_ID{0};
+    std::string m_ID{"none"};
     bool isBorrowed = true;
 
 public : 

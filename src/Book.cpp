@@ -42,6 +42,7 @@ std::istream& operator>> (std::istream& is, Book& src){
 
         src.isBorrowed = (Stringto == "1");
     }
+    return is;
 }
 
 void Book::display() const{
