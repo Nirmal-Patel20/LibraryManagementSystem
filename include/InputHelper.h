@@ -6,7 +6,7 @@
 #include <sstream>
 
 template <typename T>
-T getValidInput (const std::string& promts, T max, T min){
+T getValidInput (const std::string& promts, T min, T max){
     std::cout << promts;
 
     std::string line;
@@ -16,11 +16,11 @@ T getValidInput (const std::string& promts, T max, T min){
         std::getline(std::cin,line);
         std::istringstream iss(line);
 
-        if(iss >> value && iss.eof() && value >= max && value <= min){
+        if(iss >> value && iss.eof() && value >= min && value <= max){
             return value;
         }
 
-        std::cout << "Invalid input. please enter a value between " << max << " and " << min << ".\n";
+        std::cout << "Invalid input. please enter a value between " << min << " and " << max << ".\n";
         std::cout << "please try again : "; 
     }
 }
