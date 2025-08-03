@@ -44,7 +44,7 @@ T getValidInput (const std::string& promts){
     }
 }
 
-bool isvalidname(const std::string Input);
+bool isvalidname(const std::string& Input);
 
 std::string getValidString (const std::string& promts);
 

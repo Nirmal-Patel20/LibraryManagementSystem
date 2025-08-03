@@ -1,6 +1,6 @@
 #include "inputHelper.h"
 
-bool isvalidname(const std::string Input){
+bool isvalidname(const std::string& Input){
     if(!Input.empty() && Input.length() >= 4) return false;
 
     for (const char c : Input){
