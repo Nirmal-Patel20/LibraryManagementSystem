@@ -38,7 +38,7 @@ void LibraryManager::filesExist() {
 void LibraryManager::LoadData() {
     std::ifstream InFileBook ("DataBase/Book.txt");
     std::ifstream InFileMember ("DataBase/Member.txt");
-    std::ifstream InFileBorrowRecords ("DataBase/BorrowRecords");
+    std::ifstream InFileBorrowRecords ("DataBase/BorrowRecords.txt");
 
     std::vector<std::string> ErrorOpeningFiles;
 
@@ -81,7 +81,7 @@ void LibraryManager::LoadData() {
             std::cerr << "  - " << file << std::endl;
         }
         std::cerr << "Working directory: " << std::filesystem::current_path() << std::endl;
-        std::cerr << "Program terminated due to missing files." << std::endl;
+        std::cerr << "Program terminated due to error opening files." << std::endl;
         std::exit(EXIT_FAILURE);
     }
 }
@@ -89,7 +89,7 @@ void LibraryManager::LoadData() {
 void LibraryManager::SaveData() {
     std::ofstream OutFileBook ("DataBase/Book.txt");
     std::ofstream OutFileMember ("DataBase/Member.txt");
-    std::ofstream OutFileBorrowRecords ("DataBase/BorrowRecords");
+    std::ofstream OutFileBorrowRecords ("DataBase/BorrowRecords.txt");
 
     std::vector<std::string> ErrorOpeningFiles;
 
@@ -99,7 +99,7 @@ void LibraryManager::SaveData() {
             OutFileBorrowRecords << key << " " << value << std::endl;
         }
     }else{
-        ErrorOpeningFiles.emplace_back("DataBase/BorrowRecords");
+        ErrorOpeningFiles.emplace_back("DataBase/BorrowRecords.txt");
     }
 
     //save Members
@@ -126,7 +126,7 @@ void LibraryManager::SaveData() {
             std::cerr << "  - " << file << std::endl;
         }
         std::cerr << "Working directory: " << std::filesystem::current_path() << std::endl;
-        std::cerr << "Program terminated due to missing files." << std::endl;
+        std::cerr << "Program terminated due to error opening file." << std::endl;
         std::exit(EXIT_FAILURE);
     }
 }
