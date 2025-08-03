@@ -46,7 +46,11 @@ T getValidInput (const std::string& promts){
 
 bool isvalidname(const std::string& Input);
 
-std::string getValidString (const std::string& promts);
+std::string getValidName (const std::string& prompt);
+
+std::string getValidString (const std::string& prompt);
+
+std::string getValidID(const std::string& promts);
 
 
 #endif // InputHandler_H
