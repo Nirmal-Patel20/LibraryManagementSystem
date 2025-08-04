@@ -22,6 +22,7 @@ std::string getValidName (const std::string& prompt){
         }
 
         std::cout << "Invalid Input : " << Input << ". Either Input is empty or contains Numbers." << std::endl;
+        std::cout << "Please try again : ";
     }
 }
 
@@ -35,6 +36,7 @@ std::string getValidString (const std::string& prompt){
         }
 
         std::cout << "Invalid Input : " << Input << "Input maybe empty" <<  std::endl;
+        std::cout << "Please try again : ";
     }
 }
 
@@ -67,5 +69,29 @@ std::string getIdFromUser(const std::string& prompt) {
         }
 
         std::cout << "Invalid Book ID. Please enter a valid alphanumeric ID.\n";
+        std::cout << "Please try again : ";
     }
+}
+
+char extractInitial(const std::string& str, char fallback) {
+    for (char c : str) {
+        if (std::isalpha(c)) {
+            return std::toupper(c); // Normalize to uppercase
+        }
+    }
+    return fallback;
+}
+
+std::string getUppercase(const std::string& src) {
+    std::string Uppercase;
+
+    for (const char& c : src) {
+        if (std::isalpha(static_cast<unsigned char>(c))) {
+            Uppercase += std::toupper(static_cast<unsigned char>(c));
+        } else {
+            Uppercase += c;
+        }
+    }
+
+    return Uppercase;
 }

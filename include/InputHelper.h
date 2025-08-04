@@ -55,5 +55,9 @@ std::string getValidID(const std::string& promts);
 
 std::string getIdFromUser(const std::string& prompt);
 
+char extractInitial(const std::string& str, char fallback = 'X');
+
+std::string getUppercase(const std::string& src);
+
 
 #endif // InputHandler_H
