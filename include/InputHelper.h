@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <algorithm>
 
 template <typename T>
 T getValidInput (const std::string& promts, T min, T max){
@@ -51,6 +52,8 @@ std::string getValidName (const std::string& prompt);
 std::string getValidString (const std::string& prompt);
 
 std::string getValidID(const std::string& promts);
+
+std::string getIdFromUser(const std::string& prompt);
 
 
 #endif // InputHandler_H

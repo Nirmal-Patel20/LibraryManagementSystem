@@ -30,7 +30,7 @@ std::string getValidString (const std::string& prompt){
     std::string Input;
 
     while(true){
-        if(std::getline(std::cin,Input)){
+        if(std::getline(std::cin,Input) && !Input.empty()){
             return Input;
         }
 
@@ -41,19 +41,31 @@ std::string getValidString (const std::string& prompt){
 std::string getValidID(const std::string& prompt){
     std::cout << prompt;
     std::string ID;
-    char AuthorInitial;
-    char BookInitial;
     int code;
 
     while(true){
         std::getline(std::cin,ID);
         std::istringstream iss(ID);
 
-        if(iss >> BookInitial >> AuthorInitial >> code && iss.eof()){
+        if(iss >> code && iss.eof() && ID.length() == 4){
             return ID;
         }
 
-        std::cout << "Invalid Input: \"" << ID  << "\". ID must be a letter followed by 4 numbers (e.g., A 1234)." << std::endl;
+        std::cout << "Invalid Input: \"" << ID  << "\". ID must be 4 numbers (e.g., 1234)." << std::endl;
         std::cout << "Please try again : ";
+    }
+}
+
+std::string getIdFromUser(const std::string& prompt) {
+    std::string id;
+    while (true) {
+        std::cout << prompt;
+        std::getline(std::cin, id);
+
+        if (id.length() == 6 && std::all_of(id.begin(), id.end(), ::isalnum)) {
+            return id;
+        }
+
+        std::cout << "Invalid Book ID. Please enter a valid alphanumeric ID.\n";
     }
 }
