@@ -130,3 +130,28 @@ void LibraryManager::SaveData() {
         std::exit(EXIT_FAILURE);
     }
 }
+
+void LibraryManager::addBook() {
+    
+    std::string title = getValidString("Enter Title : ");
+    std::string author = getValidName("Enter Author name : ");
+
+    std::string IdPrefix{extractInitial(title),extractInitial(author)};
+    std::string IdSuffix = getValidID("Enter ID : ");
+    std::string bookId = IdPrefix + IdSuffix;
+    
+    auto it = std::find_if(Books.begin(),Books.end(), [&](const Book& b){return b.getID() == bookId;});
+    if(it != Books.end()){
+        std::cout << "BookID : " << bookId << " already exits." << std::endl;
+        return;
+    }
+
+    it = std::find_if(Books.begin(),Books.end(), [&](const Book& b){return getUppercase(b.getTitle()) == getUppercase(title);});
+    if(it != Books.end()){
+        std::cout << "Book : \"" << title << "\" Already exits." << std::endl;
+        return;
+    }
+
+    Books.emplace_back(title,author,bookId);
+    std::cout << "book \""  << title << "\" with ID : " << bookId << " successfully." << std::endl;
+}

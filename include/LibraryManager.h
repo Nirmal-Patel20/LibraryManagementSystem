@@ -16,7 +16,7 @@ class LibraryManager {
     std::vector<Member> Members;
     std::unordered_map<std::string , std::string> borrowRecords; // bookID -> memberID
 
-    //checkup,Load and Save
+    // File operations
     void filesExist ();
     void LoadData ();
     void SaveData ();
@@ -24,8 +24,13 @@ class LibraryManager {
 public : 
 
     LibraryManager ();
-
     ~LibraryManager ();
+
+    // Book operations
+    void addBook();
+    //void viewBooks();
+    //void deleteBook();
+    //void searchBook();
 };
 
 #endif // LibraryManager_H
