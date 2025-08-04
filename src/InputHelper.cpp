@@ -60,15 +60,20 @@ std::string getValidID(const std::string& prompt){
 
 std::string getIdFromUser(const std::string& prompt) {
     std::string id;
+    std::cout << prompt;
     while (true) {
-        std::cout << prompt;
         std::getline(std::cin, id);
 
-        if (id.length() == 6 && std::all_of(id.begin(), id.end(), ::isalnum)) {
-            return id;
+        if (id.length() == 6 && std::all_of(id.begin(), id.end(), ::isalnum)){
+            if(std::isalpha(*id.begin()) && std::isalpha(*(++id.begin()))){
+                *id.begin() = std::toupper(*id.begin());
+                *(++id.begin()) = std::toupper(*(++id.begin()));
+                return id;
+            }
+            
         }
 
-        std::cout << "Invalid Book ID. Please enter a valid alphanumeric ID.\n";
+        std::cout << "Invalid Book ID. Please enter a valid alphanumeric ID (e.g., LH1234).\n";
         std::cout << "Please try again : ";
     }
 }
@@ -94,4 +99,21 @@ std::string getUppercase(const std::string& src) {
     }
 
     return Uppercase;
+}
+
+char getValidYnN(){
+    std::string Input;
+
+    while(true){
+        std::getline(std::cin,Input);
+
+        if(!Input.empty() && Input.length() == 1){
+            char choice = std::toupper(Input[0]);
+            if(choice == 'Y' || choice == 'N'){
+                return choice;
+            }
+            std::cout << "only 'Y' and 'N'" << std::endl;
+        }
+        std::cout << "invalid Input. " << "please try again : ";
+    }
 }

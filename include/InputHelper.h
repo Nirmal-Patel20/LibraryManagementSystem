@@ -59,5 +59,7 @@ char extractInitial(const std::string& str, char fallback = 'X');
 
 std::string getUppercase(const std::string& src);
 
+char getValidYnN();
+
 
 #endif // InputHandler_H
