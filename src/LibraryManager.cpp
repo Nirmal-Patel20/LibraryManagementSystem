@@ -155,3 +155,96 @@ void LibraryManager::addBook() {
     Books.emplace_back(title,author,bookId);
     std::cout << "book \""  << title << "\" with ID : " << bookId << " successfully." << std::endl;
 }
+
+void LibraryManager::viewBooks(){
+    std::cout << "Select an option to view books:" << std::endl;
+    std::cout << "1. View by ID" << std::endl;
+    std::cout << "2. View by Author" << std::endl;
+    std::cout << "3. View by Title" << std::endl;
+    int choice = getValidInput("Please select an option (1-3): ", 1, 3);
+
+    switch (choice) {
+        case 1:
+            viewBooksById();
+            break;
+        case 2:
+            viewBooksByAuthor();
+            break;
+        case 3:
+            viewBooksByTitle();
+            break;
+    }
+}
+
+void LibraryManager::viewBooksById() {
+    std::cout << "A Book ID is formed by taking the first letters of the Book Title and Author's name, followed by a unique four-digit number (e.g., AB1234)." << std::endl;
+    std::string ID = getIdFromUser("Enter Book ID : ");
+    
+    auto it = std::find_if(Books.begin(),Books.end(), [&](const Book& src){return src.getID() == ID;});
+
+    if(it != Books.end()){
+        std::cout << std::string(40,'-') << std::endl;
+        it->display();
+        std::cout << std::string(40,'-') << std::endl;
+        std::cout << "would you like to view more Books[y,n] ? : ";
+    }else{
+        std::cout << "There is no Book with ID : " << ID << std::endl;
+        std::cout << "would you like to try again with diffrent Book ID[y,n] ? : ";
+    }
+
+    char choice = getValidYnN();
+    if(choice == 'Y'){
+        viewBooksById();
+    }
+}
+
+void LibraryManager::viewBooksByAuthor() {
+    std::string author = getValidName("Enter Author name : ");
+    bool found = false;
+
+    for(auto it = Books.begin(); it != Books.end(); ++it){
+        if(getUppercase(it->getAuthor()) == getUppercase(author)){
+            if(!found){
+                std::cout << std::string(15,'=') << "Books by \"" << author << "\"." << std::string(15,'=') << std::endl;
+                it->display();
+                std::cout << std::string(40,'-') << std::endl;
+                found = true;
+            }else{
+                it->display();
+                std::cout << std::string(40,'-') << std::endl;
+            }
+        }
+    }
+
+    if(!found){
+        std::cout << "No books found by author \"" << author << "\"." << std::endl;
+        std::cout << "would you like to try again with diffrent Book Title[y,n] ? : ";
+
+        char choice = getValidYnN();
+        if(choice == 'Y'){
+            viewBooksByAuthor();
+        }
+    }
+    
+
+    
+}
+
+void LibraryManager::viewBooksByTitle() {
+    std::string title = getValidString("Enter Book Title : ");
+    
+    auto it = std::find_if(Books.begin(),Books.end(), [&](const Book& src){return getUppercase(src.getTitle()) == getUppercase(title);});
+
+    if(it != Books.end()){
+        std::cout << std::string(40,'-') << std::endl;
+        it->display();
+        std::cout << std::string(40,'-') << std::endl;
+    }else{
+        std::cout << "There is no Book with Title : " << title << std::endl;
+        std::cout << "would you like to try again with diffrent Book Title[y,n] ? : ";
+        char choice = getValidYnN();
+        if(choice == 'Y'){
+            viewBooksByTitle();
+        }
+    }
+}

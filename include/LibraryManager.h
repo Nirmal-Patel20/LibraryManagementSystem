@@ -28,7 +28,10 @@ public :
 
     // Book operations
     void addBook();
-    //void viewBooks();
+    void viewBooks();
+        void viewBooksById();
+        void viewBooksByAuthor();
+        void viewBooksByTitle();
     //void deleteBook();
     //void searchBook();
 };
