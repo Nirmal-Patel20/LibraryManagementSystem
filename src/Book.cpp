@@ -48,6 +48,11 @@ std::istream& operator>> (std::istream& is, Book& src){
 void Book::display() const{
     std::cout << "Title : " << m_title << std::endl;
     std::cout << "Author : " << m_author << ", ID : " << m_ID << std::endl;
-    std::cout << "Status : " << (isBorrowed ? "Borrowed" : "Aviailable") << std::endl;
+    std::cout << "Status : " << (isBorrowed ? "Borrowed" : "Available") << std::endl;
+
+}
+
+void Book::displayOneline() const{
+    std::cout << "title : \"" << m_title << "\" Book ID : " << m_ID << " Status : " << (isBorrowed ? "Borrowed" : "Available") << std::endl;
 
 }

@@ -28,6 +28,7 @@ public :
     friend std::ostream& operator<< (std::ostream& os, const Book& src);
     friend std::istream& operator>> (std::istream& is, Book& src);
     void display() const;
+    void displayOneline() const;
 }; 
 
 #endif // Book_H
