@@ -6,6 +6,8 @@
 #include <vector>
 #include <unordered_map>
 #include <filesystem>
+#include <chrono>
+#include <thread>
 
 #include "Book.h"
 #include "Member.h"
@@ -36,8 +38,8 @@ public :
             void viewBooksByAuthor();
             void viewBooksByTitle();
             void viewallBooks();
-    //void deleteBook();
-    //void searchBook();
+        void deleteBook();
+    
 };
 
 #endif // LibraryManager_H
