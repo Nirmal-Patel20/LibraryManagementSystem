@@ -107,12 +107,14 @@ char getValidYnN(){
     while(true){
         std::getline(std::cin,Input);
 
-        if(!Input.empty() && Input.length() == 1){
+        if(Input.length() == 1){
             char choice = std::toupper(Input[0]);
             if(choice == 'Y' || choice == 'N'){
                 return choice;
             }
             std::cout << "only 'Y' and 'N'" << std::endl;
+        }else if(Input.empty()){
+            return 'Y'; // Default to 'Y' if input is empty
         }
         std::cout << "invalid Input. " << "please try again : ";
     }
