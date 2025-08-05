@@ -117,3 +117,8 @@ char getValidYnN(){
         std::cout << "invalid Input. " << "please try again : ";
     }
 }
+
+void cleanscreen() {
+    // Clear the console screen
+    std::cout << "\033[2J\033[1;1H"; // ANSI escape code to clear the screen and move cursor to top-left
+}

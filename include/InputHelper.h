@@ -61,5 +61,7 @@ std::string getUppercase(const std::string& src);
 
 char getValidYnN();
 
+void cleanscreen();
+
 
 #endif // InputHandler_H

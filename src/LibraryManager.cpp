@@ -132,7 +132,7 @@ void LibraryManager::SaveData() {
 }
 
 void LibraryManager::addBook() {
-    
+    cleanscreen();
     std::string title = getValidString("Enter Title : ");
     std::string author = getValidName("Enter Author name : ");
 
@@ -157,6 +157,7 @@ void LibraryManager::addBook() {
 }
 
 void LibraryManager::viewBooks(){
+    cleanscreen();
     std::cout << "Select an option to view books:" << std::endl;
     std::cout << "1. View by ID" << std::endl;
     std::cout << "2. View by Author" << std::endl;
@@ -177,6 +178,7 @@ void LibraryManager::viewBooks(){
 }
 
 void LibraryManager::viewBooksById() {
+    cleanscreen();
     std::cout << "A Book ID is formed by taking the first letters of the Book Title and Author's name, followed by a unique four-digit number (e.g., AB1234)." << std::endl;
     std::string ID = getIdFromUser("Enter Book ID : ");
     
@@ -199,6 +201,7 @@ void LibraryManager::viewBooksById() {
 }
 
 void LibraryManager::viewBooksByAuthor() {
+    cleanscreen();
     std::string author = getValidName("Enter Author name : ");
     bool found = false;
 
@@ -231,6 +234,7 @@ void LibraryManager::viewBooksByAuthor() {
 }
 
 void LibraryManager::viewBooksByTitle() {
+    cleanscreen();
     std::string title = getValidString("Enter Book Title : ");
     
     auto it = std::find_if(Books.begin(),Books.end(), [&](const Book& src){return getUppercase(src.getTitle()) == getUppercase(title);});
