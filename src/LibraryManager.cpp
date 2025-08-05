@@ -158,11 +158,14 @@ void LibraryManager::addBook() {
 
 void LibraryManager::viewBooks(){
     cleanscreen();
+    std::cout << "Here are the available ways to view books:" << std::endl;
     std::cout << "Select an option to view books:" << std::endl;
     std::cout << "1. View by ID" << std::endl;
     std::cout << "2. View by Author" << std::endl;
     std::cout << "3. View by Title" << std::endl;
-    int choice = getValidInput("Please select an option (1-3): ", 1, 3);
+    std::cout << "4. view all books(one line)" << std::endl;
+    std::cout << "5. Exit" << std::endl;
+    int choice = getValidInput("Please select an option (1-5): ", 1, 5);
 
     switch (choice) {
         case 1:
@@ -174,12 +177,19 @@ void LibraryManager::viewBooks(){
         case 3:
             viewBooksByTitle();
             break;
+        case 4:
+            viewallBooks();
+            break;
+        case 5:
+            std::cout << "Exiting the book view menu." << std::endl;
     }
 }
 
-void LibraryManager::viewBooksById() {
-    cleanscreen();
-    std::cout << "A Book ID is formed by taking the first letters of the Book Title and Author's name, followed by a unique four-digit number (e.g., AB1234)." << std::endl;
+void LibraryManager::viewBooksById(bool calledbyViewallBooks) {
+    if(!calledbyViewallBooks){
+        cleanscreen();
+        std::cout << "A Book ID is formed by taking the first letters of the Book Title and Author's name, followed by a unique four-digit number (e.g., AB1234)." << std::endl;
+    }
     std::string ID = getIdFromUser("Enter Book ID : ");
     
     auto it = std::find_if(Books.begin(),Books.end(), [&](const Book& src){return src.getID() == ID;});
@@ -197,6 +207,8 @@ void LibraryManager::viewBooksById() {
     char choice = getValidYnN();
     if(choice == 'Y'){
         viewBooksById();
+    } else {
+        std::cout << "Returning to main menu." << std::endl;
     }
 }
 
@@ -225,7 +237,9 @@ void LibraryManager::viewBooksByAuthor() {
 
         char choice = getValidYnN();
         if(choice == 'Y'){
-            viewBooksByAuthor();
+            viewBooksById();
+        } else {
+            std::cout << "Returning to main menu." << std::endl;
         }
     }
     
@@ -248,7 +262,26 @@ void LibraryManager::viewBooksByTitle() {
         std::cout << "would you like to try again with diffrent Book Title[y,n] ? : ";
         char choice = getValidYnN();
         if(choice == 'Y'){
-            viewBooksByTitle();
+            viewBooksById();
+        } else {
+            std::cout << "Returning to main menu." << std::endl;
         }
+    }
+}
+
+void LibraryManager::viewallBooks() {
+    cleanscreen();
+    std::cout << "Here are all the books:" << std::endl;
+    for(const Book& src : Books){
+        src.displayOneline();
+    }
+
+    std::cout << "would you like to view specific book details by ID[y,n] ? : ";
+    char choice = getValidYnN();
+
+    if(choice == 'Y'){
+        viewBooksById(true);
+    } else {
+        std::cout << "Returning to main menu." << std::endl;
     }
 }
