@@ -53,6 +53,12 @@ void Book::display() const{
 }
 
 void Book::displayOneline() const{
-    std::cout << "title : \"" << m_title << "\" Book ID : " << m_ID << " Status : " << (isBorrowed ? "Borrowed" : "Available") << std::endl;
 
+    std::cout 
+        << std::left << std::setw(35) << ("Title: \"" + m_title + "\"")
+        << std::left << std::setw(20) << ("Book ID: " + m_ID)
+        << std::left << std::setw(10) << "Status: " 
+        << (isBorrowed ? "Borrowed" : "Available")
+        << std::endl;
+    
 }
