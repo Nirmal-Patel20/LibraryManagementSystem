@@ -131,6 +131,53 @@ void LibraryManager::SaveData() {
     }
 }
 
+void LibraryManager::run() {
+    while (true) {
+        cleanscreen();
+        std::cout << std::string(4, '-') << " Library Manager " << std::string(4, '-') << std::endl;
+        std::cout << "Available options:" << std::endl;
+        std::cout << "1. Book Menu" << std::endl;
+        std::cout << "2. Exit" << std::endl;
+
+        int choice = getValidInput("Please select an option (1-2): ", 1, 2);
+        switch (choice) {
+            case 1:
+                bookMenu();
+                break;
+            case 2:
+                std::cout << "Exiting the Library Manager." << std::endl;
+                return;
+        }
+    }
+}
+
+void LibraryManager::bookMenu(){
+    while(true){
+        cleanscreen();
+        std::cout << std::string(4, '-') << " book Menu " << std::string(4, '-') << std::endl;
+        std::cout << "Available options:" << std::endl;
+        std::cout << "1. Add Book" << std::endl;
+        std::cout << "2. View Books" << std::endl;
+        //std::cout << "3. Borrow Book" << std::endl;
+        //std::cout << "4. Return Book" << std::endl;
+        std::cout << "3. Exit" << std::endl;
+        int choice = getValidInput("Please select an option (1-3): ", 1, 3);
+
+        switch (choice)
+        {
+        case 1:
+            addBook();
+            break;
+        case 2:
+            viewBooks();
+            break;
+        case 3:
+            std::cout << "Returning to Library Manager." << std::endl;
+            return;
+        }
+    }
+}
+
 void LibraryManager::addBook() {
     cleanscreen();
     std::string title = getValidString("Enter Title : ");
@@ -143,17 +190,20 @@ void LibraryManager::addBook() {
     auto it = std::find_if(Books.begin(),Books.end(), [&](const Book& b){return b.getID() == bookId;});
     if(it != Books.end()){
         std::cout << "BookID : " << bookId << " already exits." << std::endl;
+        std::cout << "Returning to main menu." << std::endl;
         return;
     }
 
     it = std::find_if(Books.begin(),Books.end(), [&](const Book& b){return getUppercase(b.getTitle()) == getUppercase(title);});
     if(it != Books.end()){
         std::cout << "Book : \"" << title << "\" Already exits." << std::endl;
+        std::cout << "Returning to main menu." << std::endl;
         return;
     }
 
     Books.emplace_back(title,author,bookId);
     std::cout << "book \""  << title << "\" with ID : " << bookId << " successfully." << std::endl;
+    std::cout << "Returning to main menu." << std::endl;
 }
 
 void LibraryManager::viewBooks(){
@@ -221,11 +271,11 @@ void LibraryManager::viewBooksByAuthor() {
         if(getUppercase(it->getAuthor()) == getUppercase(author)){
             if(!found){
                 std::cout << std::string(15,'=') << "Books by \"" << author << "\"." << std::string(15,'=') << std::endl;
-                it->display();
+                it->displayOneline();
                 std::cout << std::string(40,'-') << std::endl;
                 found = true;
             }else{
-                it->display();
+                it->displayOneline();
                 std::cout << std::string(40,'-') << std::endl;
             }
         }
@@ -233,17 +283,16 @@ void LibraryManager::viewBooksByAuthor() {
 
     if(!found){
         std::cout << "No books found by author \"" << author << "\"." << std::endl;
-        std::cout << "would you like to try again with diffrent Book Title[y,n] ? : ";
-
-        char choice = getValidYnN();
-        if(choice == 'Y'){
-            viewBooksById();
-        } else {
-            std::cout << "Returning to main menu." << std::endl;
-        }
     }
-    
 
+    std::cout << "would you like to try again with diffrent Book Title[y,n] ? : ";
+
+    char choice = getValidYnN();
+    if(choice == 'Y'){
+        viewBooksById();
+    } else {
+        std::cout << "Returning to book menu." << std::endl;
+    }
     
 }
 
@@ -259,13 +308,14 @@ void LibraryManager::viewBooksByTitle() {
         std::cout << std::string(40,'-') << std::endl;
     }else{
         std::cout << "There is no Book with Title : " << title << std::endl;
-        std::cout << "would you like to try again with diffrent Book Title[y,n] ? : ";
-        char choice = getValidYnN();
-        if(choice == 'Y'){
-            viewBooksById();
-        } else {
-            std::cout << "Returning to main menu." << std::endl;
-        }
+    }
+
+    std::cout << "would you like to try again with diffrent Book Title[y,n] ? : ";
+    char choice = getValidYnN();
+    if(choice == 'Y'){
+        viewBooksById();
+    } else {
+        std::cout << "Returning to main menu." << std::endl;
     }
 }
 

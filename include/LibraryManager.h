@@ -26,13 +26,16 @@ public :
     LibraryManager ();
     ~LibraryManager ();
 
+    void run();
+
     // Book operations
-    void addBook();
-    void viewBooks();
-        void viewBooksById(bool calledbyViewallBooks = false);
-        void viewBooksByAuthor();
-        void viewBooksByTitle();
-        void viewallBooks();
+    void bookMenu();
+        void addBook();
+        void viewBooks();
+            void viewBooksById(bool calledbyViewallBooks = false);
+            void viewBooksByAuthor();
+            void viewBooksByTitle();
+            void viewallBooks();
     //void deleteBook();
     //void searchBook();
 };
