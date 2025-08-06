@@ -6,6 +6,6 @@ int main() {
     std::cout << "hello world" << std::endl;
     LibraryManager system;
 
-    system.run();
+    system.MainMenu();
     return 0;
 }
