@@ -124,3 +124,13 @@ void cleanscreen() {
     // Clear the console screen
     std::cout << "\033[2J\033[1;1H"; // ANSI escape code to clear the screen and move cursor to top-left
 }
+
+void askforTryAgain(std::function<void()> callfunction){
+    char choice = getValidYnN();
+    if(choice == 'Y'){
+        callfunction();
+    } else {
+        std::cout << "Returning back to menu." << std::endl;
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+    }
+}

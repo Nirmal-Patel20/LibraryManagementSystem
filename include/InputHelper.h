@@ -5,6 +5,9 @@
 #include <string>
 #include <sstream>
 #include <algorithm>
+#include <chrono>
+#include <thread>
+#include <functional>
 
 template <typename T>
 T getValidInput (const std::string& promts, T min, T max){
@@ -62,6 +65,8 @@ std::string getUppercase(const std::string& src);
 char getValidYnN();
 
 void cleanscreen();
+
+void askforTryAgain(std::function<void()> callfunction);
 
 
 #endif // InputHandler_H
