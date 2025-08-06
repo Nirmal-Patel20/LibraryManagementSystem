@@ -46,9 +46,10 @@ void LibraryManager::MainMenu() {
         std::cout << std::string(4, '-') << " Library Manager " << std::string(4, '-') << std::endl;
         std::cout << "Available options:" << std::endl;
         std::cout << "1. Book Menu" << std::endl;
+        std::cout << "2. Member Menu" << std::endl;
         std::cout << "0. Exit" << std::endl;
 
-        int choice = getValidInput("Please select an option (0-1): ", 0, 1);
+        int choice = getValidInput("Please select an option (0-2): ", 0, 2);
         switch (choice)
         {
         case 0:
