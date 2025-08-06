@@ -163,13 +163,7 @@ void BookManager::viewBooksById(bool indirectCall) {
         std::cout << "would you like to try again with diffrent Book ID[y,n] ? (default: y) : ";
     }
 
-    char choice = getValidYnN();
-    if(choice == 'Y'){
-        viewBooksById(true);
-    } else {
-        std::cout << "Returning to book menu." << std::endl;
-        std::this_thread::sleep_for(std::chrono::seconds(1));
-    }
+    askforTryAgain([&]() {viewBooksById(true);});
 }
 
 void BookManager::viewBooksByAuthor() {
@@ -195,13 +189,7 @@ void BookManager::viewBooksByAuthor() {
 
     std::cout << "would you like to try again with diffrent Book author[y,n] ? (default: y) : ";
 
-    char choice = getValidYnN();
-    if(choice == 'Y'){
-        viewBooksByAuthor();
-    } else {
-        std::cout << "Returning to book menu." << std::endl;
-        std::this_thread::sleep_for(std::chrono::seconds(1));
-    }
+    askforTryAgain([&](){viewBooksByAuthor();});
     
 }
 
@@ -220,13 +208,7 @@ void BookManager::viewBooksByTitle() {
     }
 
     std::cout << "would you like to try again with diffrent Book Title[y,n] ? (default: y) : ";
-    char choice = getValidYnN();
-    if(choice == 'Y'){
-        viewBooksById();
-    } else {
-        std::cout << "Returning to book menu." << std::endl;
-        std::this_thread::sleep_for(std::chrono::seconds(1));
-    }
+    askforTryAgain([&](){ viewBooksByAuthor();});
 }
 
 void BookManager::viewallBooks() {
@@ -237,14 +219,8 @@ void BookManager::viewallBooks() {
     }
 
     std::cout << "would you like to view specific book details by ID[y,n] ? (default: y) : ";
-    char choice = getValidYnN();
-
-    if(choice == 'Y'){
-        viewBooksById(true);
-    } else {
-        std::cout << "Returning to book menu." << std::endl;
-        std::this_thread::sleep_for(std::chrono::seconds(1));
-    }
+    
+    askforTryAgain([&](){ viewBooksById(true);});
 }
 
 void BookManager::deleteBook() {
@@ -279,13 +255,7 @@ void BookManager::deleteBook() {
         std::cout << "No book found with ID : " << bookId << std::endl;
 
         std::cout << "Would you like to try again with a different Book ID [y,n] ? (default: y) : ";
-        char choice = getValidYnN();
-        if(choice == 'Y'){
-            deleteBook();
-        } else {
-            std::cout << "Returning to book menu." << std::endl;
-            std::this_thread::sleep_for(std::chrono::seconds(1));
-        }
+        askforTryAgain([&](){ deleteBook();});
     }
 }
 
