@@ -3,9 +3,9 @@
 
 int main() {
 
-    std::cout << "hello world" << std::endl;
     LibraryManager system;
 
     system.MainMenu();
+    std::cout << "Thank you for using the Library Management System!" << std::endl;
     return 0;
 }
