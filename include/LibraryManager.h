@@ -2,45 +2,29 @@
 #define LibraryManager_H
 
 #include <iostream>
-#include <fstream>
-#include <vector>
-#include <unordered_map>
-#include <filesystem>
 #include <chrono>
 #include <thread>
 
-#include "Book.h"
-#include "Member.h"
+#include "BookManager.h"
+#include "MemberManager.h"
+#include "BorrowRecordManager.h"
 #include "InputHelper.h"
 
 class LibraryManager {
-    std::vector<Book> Books;
-    std::vector<Member> Members;
-    std::unordered_map<std::string , std::string> borrowRecords; // bookID -> memberID
-
-    // File operations
-    void filesExist ();
-    void LoadData ();
-    void SaveData ();
+    BookManager books;
+    MemberManager members;
+    BorrowRecordManager borrowRecords;
 
 public : 
 
     LibraryManager ();
     ~LibraryManager ();
 
-    void run();
+    void checkFiles ();
 
-    // Book operations
-    void bookMenu();
-        void addBook();
-        void viewBooks();
-            void viewBooksById(bool calledbyViewallBooks = false);
-            void viewBooksByAuthor();
-            void viewBooksByTitle();
-            void viewallBooks();
-        void deleteBook();
-        void availableBooks();
-        void borrowBook();
+    void MainMenu ();
+
+    
     
 };
 
