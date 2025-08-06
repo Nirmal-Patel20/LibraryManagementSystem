@@ -27,6 +27,7 @@ public :
     void SaveFile ();
 
     // Member operations
+    void MemberMenu();
 };
 
 #endif // MemberManager_H
