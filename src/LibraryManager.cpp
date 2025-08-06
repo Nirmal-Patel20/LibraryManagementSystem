@@ -49,13 +49,17 @@ void LibraryManager::MainMenu() {
         std::cout << "0. Exit" << std::endl;
 
         int choice = getValidInput("Please select an option (0-1): ", 0, 1);
-        switch (choice) {
-            case 1:
-                books.bookMenu();
-                break;
-            case 0:
-                std::cout << "Exiting the Library Manager." << std::endl;
-                return;
+        switch (choice)
+        {
+        case 0:
+            std::cout << "Exiting the Library Manager." << std::endl;
+            return;
+        case 1:
+            books.bookMenu();
+            break;
+        case 2:
+            members.MemberMenu();
+            break;
         }
     }
 }
