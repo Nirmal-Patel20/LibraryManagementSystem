@@ -28,6 +28,7 @@ public :
 
     // Member operations
     void MemberMenu();
+        void addMember();
 };
 
 #endif // MemberManager_H
