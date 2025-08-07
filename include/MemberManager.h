@@ -29,6 +29,7 @@ public :
     // Member operations
     void MemberMenu();
         void addMember();
+        void searchMember();
 };
 
 #endif // MemberManager_H

@@ -67,7 +67,7 @@ void MemberManager::MemberMenu() {
             addMember();
             break;
         case 2:
-            //searchMember();
+            searchMember();
             break;
         case 3:
             //viewMember();
@@ -84,7 +84,7 @@ void MemberManager::addMember() {
     std::string Name = getValidName("Enter Name : ");
 
     std::string IDprefic{extractInitial(Name)};
-    IDprefic += 'A' + (std::rand() % 26); // Random uppercase letter
+
     std::string IDsuffix = getValidID("Enter Member ID : ");
     std::string MemberID = IDprefic + IDsuffix; //first letter of name + random ID
 
@@ -112,4 +112,26 @@ void MemberManager::addMember() {
     std::cout << "Member \"" << Name << "\" with ID : " << MemberID << " added successfully." << std::endl;
     std::cout << "Returning to Member menu." << std::endl;
     std::this_thread::sleep_for(std::chrono::seconds(2));
+}
+
+void MemberManager::searchMember() {
+    cleanscreen();
+    std::string searchID = getIdFromUser("Enter Member ID to search: ",true); // call GetIdFromUser for Member ID
+    
+    auto it = std::find_if(Members.begin(), Members.end(), [&](const Member& src) {
+        return src.getID() == searchID;
+    });
+
+    if(it != Members.end()){
+        std::cout << "Member found: ";
+        it->display();
+        std::cout << "Returning to Member menu." << std::endl;
+        std::this_thread::sleep_for(std::chrono::seconds(4));
+    } else {
+        std::cout << "No member found with ID: " << searchID << std::endl;
+        std::cout << "would you like to try again with diffrent Member ID[y,n] ? (default: y) : ";
+        
+        askforTryAgain([&](){searchMember();});
+    }
+
 }
