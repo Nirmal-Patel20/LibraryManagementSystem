@@ -247,7 +247,7 @@ void BookManager::deleteBook() {
             Books.erase(it);
             std::cout << "Book with ID : " << bookId << " deleted successfully." << std::endl;
         } else {
-            std::cout << "Returning to book menu." << std::endl;
+            std::cout << "Deletion cancelled." << std::endl;
         }
 
         std::this_thread::sleep_for(std::chrono::seconds(1));
