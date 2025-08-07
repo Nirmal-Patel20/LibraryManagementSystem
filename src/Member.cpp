@@ -45,9 +45,11 @@ void Member::displayOneLine () const {
 }
 
 void Member::display() const {
-    std::cout << "Name : " << m_name << ", ID : " << m_Member_ID << std::endl;
+    std::cout << "Name : " << m_name << ", ID : " << m_Member_ID << ", Borrowed status : ";
     if(m_borrowedBooks > 0) {
-        std::cout << "Borrowed Books : " << m_borrowedBooks << std::endl;
+        std::cout << m_borrowedBooks << std::endl;
+        std::cout << "Borrowed Books: \n";
+        // Assuming you have a method to display borrowed books, you can call it here.
     } else {
         std::cout << "No books borrowed." << std::endl;
     }
