@@ -58,22 +58,29 @@ std::string getValidID(const std::string& prompt){
     }
 }
 
-std::string getIdFromUser(const std::string& prompt) {
+std::string getIdFromUser(const std::string& prompt,bool callByMemberManager) {
     std::string id;
     std::cout << prompt;
     while (true) {
         std::getline(std::cin, id);
 
-        if (id.length() == 6 && std::all_of(id.begin(), id.end(), ::isalnum)){
-            if(std::isalpha(*id.begin()) && std::isalpha(*(++id.begin()))){
+        if(callByMemberManager == false){
+            if (id.length() == 6 && std::all_of(id.begin(), id.end(), ::isalnum)){
+                if(std::isalpha(*id.begin()) && std::isalpha(*(++id.begin()))){
+                    *id.begin() = std::toupper(*id.begin());
+                    *(++id.begin()) = std::toupper(*(++id.begin()));
+                    return id;
+                }        
+            }
+            std::cout << "Invalid Book ID. Please enter a valid alphanumeric ID (e.g., LH1234).\n";
+        }else{
+            if (id.length() == 5 && std::all_of(id.begin(), id.end(), ::isalnum) && std::isalpha(*id.begin())){
                 *id.begin() = std::toupper(*id.begin());
-                *(++id.begin()) = std::toupper(*(++id.begin()));
                 return id;
             }
-            
+            std::cout << "Invalid Book ID. Please enter a valid alphanumeric ID (e.g., L1234).\n";
         }
 
-        std::cout << "Invalid Book ID. Please enter a valid alphanumeric ID (e.g., LH1234).\n";
         std::cout << "Please try again : ";
     }
 }
