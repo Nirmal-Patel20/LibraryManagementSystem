@@ -73,7 +73,7 @@ void MemberManager::MemberMenu() {
             viewAllMembers();
             break;
         case 4:
-            //deleteMember();
+            deleteMember();
             break;
         }
     }
@@ -149,4 +149,36 @@ void MemberManager::viewAllMembers(){
 
     std::cout << "would you like to search Member By ID [y,n]? (default y) : ";
     askforTryAgain([&](){searchMember(true);});
+}
+
+void MemberManager::deleteMember() {
+    cleanscreen();
+    std::string searchID = getIdFromUser("Enter Member ID to delete: ", true);
+
+    auto it = std::find_if(Members.begin(), Members.end(), [&](const Member& src) {
+        return src.getID() == searchID;
+    });
+
+    if(it != Members.end()){
+        std::cout << "Member found: ";
+        it->display();
+
+        std::cout << "Are you sure to want to delete this member [y,n] ? (default: y) : ";
+        char choice = getValidYnN();
+
+        if(choice == 'y' || choice == 'Y'){
+            Members.erase(it);
+            std::cout << "Member with ID: " << searchID << " deleted successfully." << std::endl;
+        } else {
+            std::cout << "Deletion cancelled." << std::endl;
+        }
+        std::cout << "Returning to Member menu." << std::endl;
+        std::this_thread::sleep_for(std::chrono::seconds(2));
+    } else {
+        std::cout << "No member found with ID: " << searchID << std::endl;
+
+        std::cout << "Would you like to try again with a different Member ID [y,n] ? (default: y) : ";
+        askforTryAgain([&](){deleteMember();});
+    }
+
 }
