@@ -144,7 +144,7 @@ void MemberManager::viewAllMembers(){
     cleanscreen();
     std::cout << "Here are all the Members:" << std::endl;
     for(const Member& src : Members){
-        src.display();
+        src.displayOneLine();
     }
 
     std::cout << "would you like to search Member By ID [y,n]? (default y) : ";

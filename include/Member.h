@@ -10,6 +10,7 @@
 class Member {
     std::string m_name{"None"};
     std::string m_Member_ID{"None"};
+    int m_borrowedBooks{0};
 
 public : 
     Member () = default;
@@ -18,11 +19,14 @@ public :
     //getters
     std::string getName () const;
     std::string getID() const;
+    int getBorrowedBooks() const;
+    void incrementBorrowedBooks();
 
     //I/O
     friend std::ostream& operator<< (std::ostream& os,const Member& src);
     friend std::istream& operator>> (std::istream& is,Member& src);
-    void display () const;
+    void displayOneLine () const;
+    void display() const;
 };
 
 #endif // Member_H
