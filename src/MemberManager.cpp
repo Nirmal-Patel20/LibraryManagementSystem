@@ -52,7 +52,7 @@ void MemberManager::MemberMenu() {
         std::cout << "Available options : " << std::endl;
         std::cout << "1. Add Member\n";
         std::cout << "2. Search Member\n";
-        std::cout << "3. View Member\n";
+        std::cout << "3. View all Members\n";
         std::cout << "4. Delete Member\n";
         std::cout << "0. Return to Library Manager" << std::endl;
         int choice = getValidInput("Please select an option (0-4): ", 0, 4);
@@ -70,7 +70,7 @@ void MemberManager::MemberMenu() {
             searchMember();
             break;
         case 3:
-            //viewMember();
+            viewAllMembers();
             break;
         case 4:
             //deleteMember();
@@ -114,8 +114,12 @@ void MemberManager::addMember() {
     std::this_thread::sleep_for(std::chrono::seconds(2));
 }
 
-void MemberManager::searchMember() {
-    cleanscreen();
+void MemberManager::searchMember(bool indirectCall) {
+    if(!indirectCall){
+        cleanscreen();
+        std::cout << "A Member ID is formed by taking the first letter of the Member's name, followed by a unique four-digit number (e.g., N2012)." << std::endl;
+    }
+    
     std::string searchID = getIdFromUser("Enter Member ID to search: ",true); // call GetIdFromUser for Member ID
     
     auto it = std::find_if(Members.begin(), Members.end(), [&](const Member& src) {
@@ -131,7 +135,18 @@ void MemberManager::searchMember() {
         std::cout << "No member found with ID: " << searchID << std::endl;
         std::cout << "would you like to try again with diffrent Member ID[y,n] ? (default: y) : ";
         
-        askforTryAgain([&](){searchMember();});
+        askforTryAgain([&](){searchMember(true);});
     }
 
+}
+
+void MemberManager::viewAllMembers(){
+    cleanscreen();
+    std::cout << "Here are all the Members:" << std::endl;
+    for(const Member& src : Members){
+        src.display();
+    }
+
+    std::cout << "would you like to search Member By ID [y,n]? (default y) : ";
+    askforTryAgain([&](){searchMember(true);});
 }
