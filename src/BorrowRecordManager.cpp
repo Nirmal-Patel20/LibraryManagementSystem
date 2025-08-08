@@ -71,3 +71,7 @@ void BorrowRecordManager::BorrowMenu() {
         }
     }
 }
+
+void BorrowRecordManager::borrowBook(std::string_view MemberId) {
+    
+}
