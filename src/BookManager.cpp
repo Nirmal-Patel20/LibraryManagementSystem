@@ -144,26 +144,37 @@ void BookManager::viewBooks(){
     }
 }
 
-void BookManager::viewBooksById(bool indirectCall) {
+void BookManager::viewBooksById(bool indirectCall,std::string_view ID) {
     if(!indirectCall){
         cleanscreen();
         std::cout << "A Book ID is formed by taking the first letters of the Book Title and Author's name, followed by a unique four-digit number (e.g., AB1134)." << std::endl;
     }
-    std::string ID = getIdFromUser("Enter Book ID : ");
-    
-    auto it = std::find_if(Books.begin(),Books.end(), [&](const Book& src){return src.getID() == ID;});
+
+    std::string BookID;
+
+    if(ID.empty()){
+        BookID = getIdFromUser("Enter Book ID : ");
+    }else{
+        BookID = ID;
+    }
+
+    auto it = std::find_if(Books.begin(),Books.end(), [&](const Book& src){return src.getID() == BookID;});
 
     if(it != Books.end()){
         std::cout << std::string(40,'-') << std::endl;
         it->display();
         std::cout << std::string(40,'-') << std::endl;
-        std::cout << "would you like to view more Books[y,n] ? (default: y) : ";
+        
+        if(ID.empty()){
+            std::cout << "would you like to view more Books[y,n] ? (default: y) : ";
+            askforTryAgain([&]() {viewBooksById(true);});
+        }
     }else{
         std::cout << "There is no Book with ID : " << ID << std::endl;
         std::cout << "would you like to try again with diffrent Book ID[y,n] ? (default: y) : ";
+        askforTryAgain([&]() {viewBooksById(true);});
     }
 
-    askforTryAgain([&]() {viewBooksById(true);});
 }
 
 void BookManager::viewBooksByAuthor() {

@@ -30,7 +30,7 @@ public :
     void bookMenu();
         void addBook();
         void viewBooks();
-            void viewBooksById(bool indirectCall = false);
+            void viewBooksById(bool indirectCall = false,std::string_view ID = "");
             void viewBooksByAuthor();
             void viewBooksByTitle();
             void viewallBooks();
