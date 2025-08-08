@@ -7,21 +7,30 @@
 #include <chrono>
 #include <thread>
 #include <unordered_map>
+#include "InputHelper.h"
+#include "BookManager.h"
+#include "MemberManager.h"
 
 class BorrowRecordManager {
     std::unordered_map<std::string, std::string> BorrowRecords; //BookID to MemberID
+    BookManager& books;
+    MemberManager& members;
 
     // File operations
     std::string m_file;
 
 public : 
 
-    BorrowRecordManager(std::string_view file = "DataBase/BorrowRecords.txt");
+    BorrowRecordManager(BookManager& bookManager, MemberManager& memberManager, std::string_view file = "DataBase/BorrowRecords.txt");
     ~BorrowRecordManager() = default;
 
     std::string filesExist ();
     void LoadFile ();
     void SaveFile ();
+
+    //Borrowing operations
+    void BorrowMenu ();
+
 };
 
 #endif // BorrowRecordManager_H

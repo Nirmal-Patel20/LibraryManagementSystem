@@ -1,6 +1,7 @@
 #include "BorrowRecordManager.h"
 
-BorrowRecordManager::BorrowRecordManager(std::string_view file) : m_file(file){
+BorrowRecordManager::BorrowRecordManager(BookManager& bookManager, MemberManager& memberManager, std::string_view file)
+                                             : books(bookManager), members(memberManager), m_file(file){
 
 }
 
@@ -43,5 +44,30 @@ void BorrowRecordManager::SaveFile() {
         std::cerr << "Working directory: " << std::filesystem::current_path() << std::endl;
         std::cerr << "Program terminated due to error opening files." << std::endl;
         std::exit(EXIT_FAILURE);
+    }
+}
+
+void BorrowRecordManager::BorrowMenu() {
+    while(true){
+        std::cout << std::string(4, '-') << " Borrow Book Menu " << std::string(4, '-') << std::endl;
+
+        std::cout << "1. Borrow Book" << std::endl;
+        std::cout << "2. Return Book" << std::endl;
+
+        int choice = getValidInput("Please select an option (0-2): ", 0, 2);
+
+        switch (choice)
+        {
+        case 1:
+            // Borrow Book code
+            break;
+        case 2:
+            // Return Book code
+            break;
+        case 0:
+            std::cout << "Returning to Library Manager." << std::endl;
+            std::this_thread::sleep_for(std::chrono::seconds(1));
+            return;
+        }
     }
 }
