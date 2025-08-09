@@ -47,9 +47,10 @@ void LibraryManager::MainMenu() {
         std::cout << "Available options:" << std::endl;
         std::cout << "1. Book Menu" << std::endl;
         std::cout << "2. Member Menu" << std::endl;
+        std::cout << "3. Borrow Book Menu" << std::endl;
         std::cout << "0. Exit" << std::endl;
 
-        int choice = getValidInput("Please select an option (0-2): ", 0, 2);
+        int choice = getValidInput("Please select an option (0-3): ", 0, 3);
         switch (choice)
         {
         case 0:
@@ -60,6 +61,9 @@ void LibraryManager::MainMenu() {
             break;
         case 2:
             members.MemberMenu();
+            break;
+        case 3:
+            borrowRecords.BorrowMenu();
             break;
         }
     }
