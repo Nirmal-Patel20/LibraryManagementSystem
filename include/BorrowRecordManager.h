@@ -30,7 +30,7 @@ public :
 
     //Borrowing operations
     void BorrowMenu ();
-        void borrowBook(std::string_view MemberId = "Not given");
+        void borrowBook(std::string_view MemberId = "",bool calledbyMemberManager = false);
         //void returnBook(std::string_view MemberId = "Not given");
         //void borrowRecord(std::string_view MemberId = "Not given");
 

@@ -53,13 +53,14 @@ void BorrowRecordManager::BorrowMenu() {
 
         std::cout << "1. Borrow Book" << std::endl;
         std::cout << "2. Return Book" << std::endl;
+        std::cout << "0. Return to Library Manager" << std::endl;
 
         int choice = getValidInput("Please select an option (0-2): ", 0, 2);
 
         switch (choice)
         {
         case 1:
-            // Borrow Book code
+            borrowBook();
             break;
         case 2:
             // Return Book code
@@ -72,6 +73,19 @@ void BorrowRecordManager::BorrowMenu() {
     }
 }
 
-void BorrowRecordManager::borrowBook(std::string_view MemberId) {
+void BorrowRecordManager::borrowBook(std::string_view MemberId, bool calledbyMemberManager) {
+    std::string bookId = getIdFromUser("Enter Book ID : "); //for book ID
+    if (MemberId.empty()) {
+        MemberId = getIdFromUser("Enter Member ID : ", true); //for member ID
+        std::cout << "searching for Book ID: " << bookId << std::endl;
+        books.viewBooksById(true, bookId);
+    }
     
+
+    std::cout << "searching for Member ID: " << MemberId << std::endl;
+    members.searchMember(true, MemberId);
+
+    if(!calledbyMemberManager){
+        BorrowRecords[bookId] = MemberId;
+    }
 }
