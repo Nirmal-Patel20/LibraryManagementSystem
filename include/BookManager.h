@@ -36,7 +36,7 @@ public :
             void viewallBooks();
         void deleteBook();
         void availableBooks();
-        void borrowBook();
+        void borrowedBook();
 };
 
 #endif // BookManager_H

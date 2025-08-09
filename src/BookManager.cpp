@@ -53,7 +53,7 @@ void BookManager::bookMenu(){
         std::cout << "2. View Books" << std::endl;
         std::cout << "3. Delete Book" << std::endl;
         std::cout << "4. Available Books" << std::endl;
-        std::cout << "5. Borrow Books" << std::endl;
+        std::cout << "5. Borrowed Books" << std::endl;
         std::cout << "0. Return to Library Manager" << std::endl;
         int choice = getValidInput("Please select an option (0-5): ", 0, 5);
 
@@ -72,7 +72,7 @@ void BookManager::bookMenu(){
             availableBooks();
             break;
         case 5:
-            borrowBook();
+            borrowedBook();
             break;
         case 0:
             std::cout << "Returning to Library Manager." << std::endl;
@@ -300,7 +300,7 @@ void BookManager::availableBooks() {
 
 }
 
-void BookManager::borrowBook() {
+void BookManager::borrowedBook() {
     cleanscreen();
     std::cout << "Searching borrowed Books : " << std::endl;
     std::this_thread::sleep_for(std::chrono::seconds(2));
