@@ -29,7 +29,7 @@ public :
     // Member UI operations
     void MemberMenu();
         void addMember();
-        void searchMember(bool indirectCall = false,std::string_view ID = "");
+        void searchMember(bool indirectCall = false,std::string_view PassedID = "");
         void viewAllMembers();
         void deleteMember();
 
