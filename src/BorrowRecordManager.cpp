@@ -64,7 +64,7 @@ void BorrowRecordManager::BorrowMenu() {
             borrowBook();
             break;
         case 2:
-            // Return Book code
+            returnBook();
             break;
         case 0:
             std::cout << "Returning to Library Manager." << std::endl;
@@ -82,7 +82,7 @@ void BorrowRecordManager::borrowBook() {
 
     if(Memberptr != nullptr){
         std::cout << "Member found: ";
-        Memberptr->display();
+        Memberptr->displayOneLine();
         if(Memberptr->getBorrowedBooks() >= 3){
             std::cout << "Member has reached the maximum limit(3) of borrowed books." << std::endl;
             std::cout << "press <Enter> to continue...";
@@ -130,6 +130,74 @@ void BorrowRecordManager::borrowBook() {
     Bookptr->setBorrowedStatus(true);
     Memberptr->incrementBorrowedBooks();
     std::cout << "Book borrowed successfully." << std::endl;
+    std::cout << "press <Enter> to continue...";
+    std::cin.get();
+    std::cout << "Returning back to menu." << std::endl;
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+}
+
+void BorrowRecordManager::returnBook(){
+    cleanscreen();
+    std::string MemberId = getIdFromUser("Enter Member ID : ",true); //for member ID
+    std::cout << "searching for Member ID: " << MemberId << std::endl;
+    auto Memberptr = members.findMemberById(MemberId);
+
+
+
+    if(Memberptr != nullptr){
+
+        auto it = std::find_if(BorrowRecords.begin(), BorrowRecords.end(),
+                    [&MemberId](const auto& record) { return record.second == MemberId; });
+
+        if(it != BorrowRecords.end()){
+            std::cout << "Member found: ";
+            Memberptr->display();
+        }else{
+            std::cout << "Member found: ";
+            Memberptr->displayOneLine();
+            std::cout << "this member has not borrowed any books." << std::endl;
+            std::cout << "press <Enter> to continue...";
+            std::cin.get();
+            std::cout << "Returning back to menu." << std::endl;
+            std::this_thread::sleep_for(std::chrono::seconds(1));
+            return;
+        }
+    }else{
+        std::cout << "No member found with ID: " << MemberId << std::endl;
+        std::cout << "press <Enter> to continue...";
+        std::cin.get();
+        std::cout << "Returning back to menu." << std::endl;
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+        return;
+    }
+
+    std::string bookId = getIdFromUser("Enter Book ID : "); //for book ID
+    std::cout << "searching for Book ID: " << bookId << std::endl;
+    auto borrowedBook = BorrowRecords.find(bookId);
+    if(borrowedBook != BorrowRecords.end()){
+        if(borrowedBook->second != MemberId){
+            std::cout << "This book is not borrowed by \""<< Memberptr->getName() << "\"" << std::endl;
+            std::cout << "press <Enter> to continue...";
+            std::cin.get();
+            std::cout << "Returning back to menu." << std::endl;
+            std::this_thread::sleep_for(std::chrono::seconds(1));
+            return;
+        }
+    }else{
+        std::cout << "No Borrowed book found with ID: " << bookId << std::endl;
+        std::cout << "press <Enter> to continue...";
+        std::cin.get();
+        std::cout << "Returning back to menu." << std::endl;
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+        return;
+    }
+    auto Bookptr = books.findBookById(bookId);
+
+    //if we reach here, the book is ready to return
+    BorrowRecords.erase(bookId);
+    Bookptr->setBorrowedStatus(false);
+    Memberptr->decrementBorrowedBooks();
+    std::cout << "Book returned successfully." << std::endl;
     std::cout << "press <Enter> to continue...";
     std::cin.get();
     std::cout << "Returning back to menu." << std::endl;
