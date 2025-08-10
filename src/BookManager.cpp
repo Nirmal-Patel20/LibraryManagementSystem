@@ -257,28 +257,34 @@ void BookManager::deleteBook() {
     std::cout << "Enter the ID of the book you want to delete." << std::endl;
     std::string bookId = getIdFromUser("Book ID : ");
 
-    auto it = std::find_if(Books.begin(), Books.end(),[&](const Book& src){return src.getID() == bookId;});
+    auto Bookptr = findBookById(bookId);
 
-    if(it != Books.end()){
+    if(Bookptr != nullptr){
         std::cout << "Book found : ";
-        it->displayOneline();
+        Bookptr->displayOneline();
 
         std::cout << "Are you sure to want to delete this book [y,n] ? (default: y) : ";
         char choice = getValidYnN();
 
         if(choice == 'Y'){
+            auto it = std::find_if(Books.begin(), Books.end(),
+                            [Bookptr](const Book& b) { return &b == Bookptr; });
             Books.erase(it);
             std::cout << "Book with ID : " << bookId << " deleted successfully." << std::endl;
         } else {
             std::cout << "Deletion cancelled." << std::endl;
         }
-
+        std::cout << "press <Enter> to continue...";
+        std::cin.get();
+        std::cout << "Returning to Book menu." << std::endl;
         std::this_thread::sleep_for(std::chrono::seconds(1));
+        return;
     }else{
         std::cout << "No book found with ID : " << bookId << std::endl;
 
         std::cout << "Would you like to try again with a different Book ID [y,n] ? (default: y) : ";
         askforTryAgain([&](){ deleteBook();});
+        return;
     }
 }
 
