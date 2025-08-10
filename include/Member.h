@@ -21,6 +21,7 @@ public :
     std::string getID() const;
     int getBorrowedBooks() const;
     void incrementBorrowedBooks();
+    void decrementBorrowedBooks();
 
     //I/O
     friend std::ostream& operator<< (std::ostream& os,const Member& src);

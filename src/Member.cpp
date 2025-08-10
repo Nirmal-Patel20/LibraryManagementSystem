@@ -20,6 +20,10 @@ void Member::incrementBorrowedBooks() {
     ++m_borrowedBooks;
 }
 
+void Member::decrementBorrowedBooks() {
+    --m_borrowedBooks;
+}
+
 std::ostream& operator<< (std::ostream& os,const Member& src){
     os << src.m_name << "," << src.m_Member_ID << "," << src.m_borrowedBooks;
     return os;
