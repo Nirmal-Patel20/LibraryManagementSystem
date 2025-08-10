@@ -91,7 +91,7 @@ Book* BookManager::findBookById(const std::string& id) {
 
 Book* BookManager::findBookByTitle(const std::string& title) {
 
-    auto it = std::find_if(Books.begin(), Books.end(), [&](const Book& b) { return b.getTitle() == title; });
+    auto it = std::find_if(Books.begin(), Books.end(), [&](const Book& b) { return getUppercase(b.getTitle()) == getUppercase(title); });
 
     return (it != Books.end()) ? &(*it) : nullptr;
 }
