@@ -178,25 +178,28 @@ void MemberManager::deleteMember() {
     cleanscreen();
     std::string searchID = getIdFromUser("Enter Member ID to delete: ", true);
 
-    auto it = std::find_if(Members.begin(), Members.end(), [&](const Member& src) {
-        return src.getID() == searchID;
-    });
+    auto Memberptr = findMemberById(searchID);
 
-    if(it != Members.end()){
+    if(Memberptr != nullptr){
         std::cout << "Member found: ";
-        it->display();
+        Memberptr->display();
 
         std::cout << "Are you sure to want to delete this member [y,n] ? (default: y) : ";
         char choice = getValidYnN();
 
         if(choice == 'y' || choice == 'Y'){
+            auto it = std::find_if(Members.begin(), Members.end(), [&](const Member& src) {
+                return &src == Memberptr;
+            });
             Members.erase(it);
             std::cout << "Member with ID: " << searchID << " deleted successfully." << std::endl;
         } else {
             std::cout << "Deletion cancelled." << std::endl;
         }
+        std::cout << "press <Enter> to continue...";
+        std::cin.get();
         std::cout << "Returning to Member menu." << std::endl;
-        std::this_thread::sleep_for(std::chrono::seconds(2));
+        std::this_thread::sleep_for(std::chrono::seconds(1));
     } else {
         std::cout << "No member found with ID: " << searchID << std::endl;
 
