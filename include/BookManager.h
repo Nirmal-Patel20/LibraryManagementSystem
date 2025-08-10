@@ -40,6 +40,7 @@ public :
 
     // Book Operations logic
     Book* findBookById(const std::string& id);
+    Book* findBookByTitle(const std::string& title);
 };
 
 #endif // BookManager_H

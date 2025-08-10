@@ -89,6 +89,13 @@ Book* BookManager::findBookById(const std::string& id) {
     return (it != Books.end()) ? &(*it) : nullptr;
 }
 
+Book* BookManager::findBookByTitle(const std::string& title) {
+
+    auto it = std::find_if(Books.begin(), Books.end(), [&](const Book& b) { return b.getTitle() == title; });
+
+    return (it != Books.end()) ? &(*it) : nullptr;
+}
+
 void BookManager::addBook() {
     cleanscreen();
     std::string title = getValidString("Enter Title : ");
@@ -212,12 +219,12 @@ void BookManager::viewBooksByAuthor() {
 void BookManager::viewBooksByTitle() {
     cleanscreen();
     std::string title = getValidString("Enter Book Title : ");
-    
-    auto it = std::find_if(Books.begin(),Books.end(), [&](const Book& src){return getUppercase(src.getTitle()) == getUppercase(title);});
 
-    if(it != Books.end()){
+    auto Bookptr = findBookByTitle(title);
+
+    if(Bookptr != nullptr){
         std::cout << std::string(40,'-') << std::endl;
-        it->display();
+        Bookptr->display();
         std::cout << std::string(40,'-') << std::endl;
     }else{
         std::cout << "There is no Book with Title : " << title << std::endl;
