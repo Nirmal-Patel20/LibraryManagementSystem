@@ -82,6 +82,13 @@ void BookManager::bookMenu(){
     }
 }
 
+Book* BookManager::findBookById(const std::string& id) {
+
+    auto it = std::find_if(Books.begin(), Books.end(), [&](const Book& b) { return b.getID() == id; });
+
+    return (it != Books.end()) ? &(*it) : nullptr;
+}
+
 void BookManager::addBook() {
     cleanscreen();
     std::string title = getValidString("Enter Title : ");
@@ -90,27 +97,25 @@ void BookManager::addBook() {
     std::string IdPrefix{extractInitial(title),extractInitial(author)};
     std::string IdSuffix = getValidID("Enter ID : ");
     std::string bookId = IdPrefix + IdSuffix;
-    
-    auto it = std::find_if(Books.begin(),Books.end(), [&](const Book& b){return b.getID() == bookId;});
-    if(it != Books.end()){
-        std::cout << "BookID : " << bookId << " already exits." << std::endl;
+
+    auto Bookptr = findBookById(bookId);
+
+    if(Bookptr != nullptr){
+        std::cout << "A book with ID : " << bookId << " already exists." << std::endl;
+        std::cout << "press <Enter> to continue...";
+        std::cin.get();
         std::cout << "Returning to Book menu." << std::endl;
         std::this_thread::sleep_for(std::chrono::seconds(1));
         return;
-    }
-
-    it = std::find_if(Books.begin(),Books.end(), [&](const Book& b){return getUppercase(b.getTitle()) == getUppercase(title);});
-    if(it != Books.end()){
-        std::cout << "Book : \"" << title << "\" Already exits." << std::endl;
+    }else{
+        Books.emplace_back(title,author,bookId);
+        std::cout << "book \""  << title << "\" with ID : " << bookId << " successfully." << std::endl;
+        std::cout << "press <Enter> to continue...";
+        std::cin.get();
         std::cout << "Returning to Book menu." << std::endl;
         std::this_thread::sleep_for(std::chrono::seconds(1));
-        return;
     }
-
-    Books.emplace_back(title,author,bookId);
-    std::cout << "book \""  << title << "\" with ID : " << bookId << " successfully." << std::endl;
-    std::cout << "Returning to Book menu." << std::endl;
-    std::this_thread::sleep_for(std::chrono::seconds(1));
+  
 }
 
 void BookManager::viewBooks(){

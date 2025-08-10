@@ -26,7 +26,7 @@ public :
     void LoadFile ();
     void SaveFile ();
 
-    // Book operations
+    // Book UI operations
     void bookMenu();
         void addBook();
         void viewBooks();
@@ -37,6 +37,9 @@ public :
         void deleteBook();
         void availableBooks();
         void borrowedBook();
+
+    // Book Operations logic
+    Book* findBookById(const std::string& id);
 };
 
 #endif // BookManager_H
