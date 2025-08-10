@@ -79,6 +79,20 @@ void MemberManager::MemberMenu() {
     }
 }
 
+Member* MemberManager::findMemberById(const std::string& id) {
+    auto it = std::find_if(Members.begin(), Members.end(), [&](const Member& src) {
+        return src.getID() == id;
+    });
+    return (it != Members.end()) ? &(*it) : nullptr;
+}
+
+Member* MemberManager::findMemberByName(const std::string& name) {
+    auto it = std::find_if(Members.begin(), Members.end(), [&](const Member& src) {
+        return getUppercase(src.getName()) == getUppercase(name);
+    });
+    return (it != Members.end()) ? &(*it) : nullptr;
+}
+
 void MemberManager::addMember() {
     cleanscreen();
     std::string Name = getValidName("Enter Name : ");
@@ -86,22 +100,18 @@ void MemberManager::addMember() {
     std::string IDprefic{extractInitial(Name)};
 
     std::string IDsuffix = getValidID("Enter Member ID : ");
-    std::string MemberID = IDprefic + IDsuffix; //first letter of name + random ID
+    std::string MemberID = IDprefic + IDsuffix;
 
-    auto it = std::find_if(Members.begin(), Members.end(), [&](const Member& src) {
-        return src.getID() == MemberID;
-    });
-    if(it != Members.end()){
+    auto itID = findMemberById(MemberID);
+    if(itID != nullptr){
         std::cout << "Member with ID : " << MemberID << " already exists." << std::endl;
         std::cout << "Returning to Member menu." << std::endl;
         std::this_thread::sleep_for(std::chrono::seconds(2));
         return;
     }
 
-    auto itName = std::find_if(Members.begin(), Members.end(), [&](const Member& src) {
-        return getUppercase(src.getName()) == getUppercase(Name);
-    });
-    if(itName != Members.end()){
+    auto itName = findMemberByName(Name);
+    if(itName != nullptr){
         std::cout << "Member with Name : " << Name << " already exists." << std::endl;
         std::cout << "Returning to Member menu." << std::endl;
         std::this_thread::sleep_for(std::chrono::seconds(2));
@@ -110,8 +120,10 @@ void MemberManager::addMember() {
 
     Members.emplace_back(Name, MemberID);
     std::cout << "Member \"" << Name << "\" with ID : " << MemberID << " added successfully." << std::endl;
+    std::cout << "press <Enter> to continue...";
+    std::cin.get();
     std::cout << "Returning to Member menu." << std::endl;
-    std::this_thread::sleep_for(std::chrono::seconds(2));
+    std::this_thread::sleep_for(std::chrono::seconds(1));
 }
 
 void MemberManager::searchMember(bool indirectCall, std::string_view ID) {

@@ -26,12 +26,16 @@ public :
     void LoadFile ();
     void SaveFile ();
 
-    // Member operations
+    // Member UI operations
     void MemberMenu();
         void addMember();
         void searchMember(bool indirectCall = false,std::string_view ID = "");
         void viewAllMembers();
         void deleteMember();
+
+    // Member operations Logic
+    Member* findMemberById(const std::string& id);
+    Member* findMemberByName(const std::string& name);
 };
 
 #endif // MemberManager_H
