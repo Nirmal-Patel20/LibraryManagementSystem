@@ -1,6 +1,6 @@
 Elon Mask,E3360,0
 Robert Greene,R4545,0
-Aizan Sama,A6969,0
+Aizan Sama,A6969,3
 Ichigo Kurasaki,I6345,0
 Luffy D Monkey,L4587,0
 waguri karaoke,W7777,0
