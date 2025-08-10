@@ -30,10 +30,11 @@ public :
 
     //Borrowing operations
     void BorrowMenu ();
-        void borrowBook(std::string_view MemberId = "",bool calledbyMemberManager = false);
+        void borrowBook();
         //void returnBook(std::string_view MemberId = "Not given");
         //void borrowRecord(std::string_view MemberId = "Not given");
 
+    
 };
 
 #endif // BorrowRecordManager_H
