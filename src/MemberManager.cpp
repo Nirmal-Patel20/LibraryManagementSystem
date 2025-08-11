@@ -177,7 +177,16 @@ void MemberManager::deleteMember() {
 
     if(Memberptr != nullptr){
         std::cout << "Member found: ";
-        Memberptr->display();
+        Memberptr->displayOneLine();
+
+        if(Memberptr->getBorrowedBooksCount() != 0){
+            std::cout << "This member currently has borrowed books and cannot be deleted." << std::endl;
+            std::cout << "press <Enter> to continue...";
+            std::cin.get();
+            std::cout << "Returning to Member menu." << std::endl;
+            std::this_thread::sleep_for(std::chrono::seconds(1));
+            return;
+        }
 
         std::cout << "Are you sure to want to delete this member [y,n] ? (default: y) : ";
         char choice = getValidYnN();

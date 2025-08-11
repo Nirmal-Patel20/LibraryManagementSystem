@@ -85,7 +85,7 @@ void BorrowRecordManager::borrowBook() {
     if(Memberptr != nullptr){
         std::cout << "Member found: ";
         Memberptr->displayOneLine();
-        if(Memberptr->getBorrowedBooks() >= 3){
+        if(Memberptr->getBorrowedBooksCount() >= 3){
             std::cout << "Member has reached the maximum limit(3) of borrowed books." << std::endl;
             std::cout << "press <Enter> to continue...";
             std::cin.get();
@@ -136,7 +136,7 @@ void BorrowRecordManager::borrowBook() {
     // If we reach here, the book is available for borrowing
     BorrowRecords[bookId] = MemberId;
     Bookptr->setBorrowedStatus(true);
-    Memberptr->incrementBorrowedBooks();
+    Memberptr->incrementBorrowedBooksCount();
     std::cout << "Book borrowed successfully." << std::endl;
     std::cout << "press <Enter> to continue...";
     std::cin.get();
@@ -157,7 +157,7 @@ void BorrowRecordManager::returnBook(){
     if(Memberptr != nullptr){
 
 
-        if(Memberptr->getBorrowedBooks() != 0){
+        if(Memberptr->getBorrowedBooksCount() != 0){
             borrowRecordsOfMember = getBorrowedBooksRecord(MemberId);
 
             std::cout << "Member found: ";
@@ -195,7 +195,7 @@ void BorrowRecordManager::returnBook(){
     //if we reach here, the book is ready to return
     BorrowRecords.erase(borrowRecordsOfMember[returnBookIndex]->getID());
     borrowRecordsOfMember[returnBookIndex]->setBorrowedStatus(false);
-    members.findMemberById(MemberId)->decrementBorrowedBooks();
+    members.findMemberById(MemberId)->decrementBorrowedBooksCount();
     std::cout << "Book returned successfully." << std::endl;
     std::cout << "press <Enter> to continue...";
     std::cin.get();

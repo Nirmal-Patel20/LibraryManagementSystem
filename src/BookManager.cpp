@@ -248,6 +248,15 @@ void BookManager::deleteBook() {
         std::cout << "Book found : ";
         Bookptr->displayOneline();
 
+        if(Bookptr->getBorrowedStatus()){
+            std::cout << "This book is currently borrowed and cannot be deleted." << std::endl;
+            std::cout << "press <Enter> to continue...";
+            std::cin.get();
+            std::cout << "Returning to Book menu." << std::endl;
+            std::this_thread::sleep_for(std::chrono::seconds(1));
+            return;
+        }
+
         std::cout << "Are you sure to want to delete this book [y,n] ? (default: y) : ";
         char choice = getValidYnN();
 
