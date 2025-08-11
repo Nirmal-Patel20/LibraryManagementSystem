@@ -126,41 +126,27 @@ void MemberManager::addMember() {
     std::this_thread::sleep_for(std::chrono::seconds(1));
 }
 
-void MemberManager::searchMember(bool indirectCall, std::string_view PassedID) {
+void MemberManager::searchMember(bool indirectCall) {
     if(!indirectCall){
         cleanscreen();
         std::cout << "A Member ID is formed by taking the first letter of the Member's name, followed by a unique four-digit number (e.g., N2012)." << std::endl;
     }
     
-    std::string searchID;
-    if(PassedID.empty()){
-        searchID = getIdFromUser("Enter Member ID : ", true);
-    } else {
-        searchID = PassedID;
-    }
+    std::string searchID = getIdFromUser("Enter Member ID : ", true);
     
     auto Memberptr = findMemberById(searchID);
 
     if(Memberptr != nullptr){
         std::cout << "Member found: ";
         Memberptr->display();
-
-        if(PassedID.empty()){
-            std::cout << "would you like to view more Members[y,n] ? (default: y) : ";
-            askforTryAgain([&]() {searchMember(true);});
-        }
+        
+        std::cout << "would you like to view more Members[y,n] ? (default: y) : ";
     } else {
         std::cout << "No member found with ID: " << searchID << std::endl;
         std::cout << "would you like to try again with diffrent Member ID[y,n] ? (default: y) : ";
-        askforTryAgain([&](){searchMember(true);});
-    }
-    if(!indirectCall){
-        std::cout << "press <Enter> to continue...";
-        std::cin.get();
-        std::cout << "Returning to Member menu." << std::endl;
-        std::this_thread::sleep_for(std::chrono::seconds(1));
     }
 
+    askforTryAgain([&]() {searchMember(true);});
 }
 
 void MemberManager::viewAllMembers(){
