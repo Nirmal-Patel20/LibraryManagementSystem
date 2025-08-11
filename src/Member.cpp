@@ -53,7 +53,7 @@ void Member::display() const {
     if(m_borrowedBooks > 0) {
         std::cout << m_borrowedBooks << std::endl;
         std::cout << "Borrowed Books: \n";
-        // Assuming you have a method to display borrowed books, you can call it here.
+        //MemberManager handles the display of borrowed books
     } else {
         std::cout << "No books borrowed." << std::endl;
     }
