@@ -19,9 +19,9 @@ public :
     //getters
     std::string getName () const;
     std::string getID() const;
-    int getBorrowedBooks() const;
-    void incrementBorrowedBooks();
-    void decrementBorrowedBooks();
+    int getBorrowedBooksCount() const;
+    void incrementBorrowedBooksCount();
+    void decrementBorrowedBooksCount();
 
     //I/O
     friend std::ostream& operator<< (std::ostream& os,const Member& src);

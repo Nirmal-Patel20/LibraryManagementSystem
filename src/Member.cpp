@@ -12,15 +12,15 @@ std::string Member::getID () const {
     return m_Member_ID;
 }
 
-int Member::getBorrowedBooks() const {
+int Member::getBorrowedBooksCount() const {
     return m_borrowedBooks;
 }
 
-void Member::incrementBorrowedBooks() {
+void Member::incrementBorrowedBooksCount() {
     ++m_borrowedBooks;
 }
 
-void Member::decrementBorrowedBooks() {
+void Member::decrementBorrowedBooksCount() {
     --m_borrowedBooks;
 }
 
