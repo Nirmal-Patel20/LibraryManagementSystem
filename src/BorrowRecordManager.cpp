@@ -1,4 +1,6 @@
 #include "BorrowRecordManager.h"
+#include "BookManager.h" // Full definition needed here to use their utility methods and BookManager include Book definition
+#include "MemberManager.h"
 
 BorrowRecordManager::BorrowRecordManager(BookManager& bookManager, MemberManager& memberManager, std::string_view file)
                                              : books(bookManager), members(memberManager), m_file(file){
@@ -158,6 +160,13 @@ void BorrowRecordManager::returnBook(){
 
             std::cout << "Member found: ";
             Memberptr->display();
+            int i = 1;
+
+            for(const auto& src : borrowRecordsOfMember){
+                std::cout << i << ". Title : " << src->getTitle() << ", BookId : " << src->getID() << " .\n";
+                ++i;
+            }
+            
         }else{
             std::cout << "Member found: ";
             Memberptr->displayOneLine();

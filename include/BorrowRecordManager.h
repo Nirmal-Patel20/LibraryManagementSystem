@@ -8,8 +8,10 @@
 #include <thread>
 #include <unordered_map>
 #include "InputHelper.h"
-#include "BookManager.h"
-#include "MemberManager.h"
+
+class Book; // Forward declaration
+class BookManager; // Forward declaration
+class MemberManager; // Forward declaration
 
 class BorrowRecordManager {
     std::unordered_map<std::string, std::string> BorrowRecords; //BookID to MemberID
