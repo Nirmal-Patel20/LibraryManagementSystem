@@ -100,7 +100,13 @@ void BorrowRecordManager::borrowBook() {
         return;
     }
 
-    
+    std::cout << "would you like to see the available books? [y/n] (default: y) : ";
+    char choice = getValidYnN();
+    if(choice == 'Y'){
+        std::cout << "Book is available for borrowing." << std::endl;
+        books.availableBooks(true); //indirect call to availableBooks
+    }
+
     std::string bookId = getIdFromUser("Enter Book ID : "); //for book ID
     std::cout << "searching for Book ID: " << bookId << std::endl;
     auto Bookptr = books.findBookById(bookId);
