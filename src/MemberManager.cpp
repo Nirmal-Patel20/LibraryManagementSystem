@@ -1,4 +1,6 @@
 #include "MemberManager.h"
+#include "Book.h"
+#include "BorrowRecordManager.h"// Full definition needed here to use BorrowRecordManager methods
 
 MemberManager::MemberManager(std::string_view file) : m_file(file) {
 
@@ -139,6 +141,13 @@ void MemberManager::searchMember(bool indirectCall) {
     if(Memberptr != nullptr){
         std::cout << "Member found: ";
         Memberptr->display();
+        auto borrowBooksptr = borrowRecords->getBorrowedBooksRecord(Memberptr->getID());
+        int i = 1;
+
+        for(const auto& src : borrowBooksptr){
+            std::cout << i << ". Title : " << src->getTitle() << ", BookId : " << src->getID() << " .\n";
+            ++i;
+        }
         
         std::cout << "would you like to view more Members[y,n] ? (default: y) : ";
     } else {
@@ -193,4 +202,8 @@ void MemberManager::deleteMember() {
         askforTryAgain([&](){deleteMember();});
     }
 
+}
+
+void MemberManager::setBorrowRecordManager(BorrowRecordManager* borrowRecordManager) {
+    borrowRecords = borrowRecordManager;
 }
