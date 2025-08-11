@@ -149,6 +149,8 @@ void BorrowRecordManager::returnBook(){
     std::string MemberId = getIdFromUser("Enter Member ID : ",true); //for member ID
     std::cout << "searching for Member ID: " << MemberId << std::endl;
     auto Memberptr = members.findMemberById(MemberId);
+    std::vector<Book*> borrowRecordsOfMember;
+    int returnBookIndex = 0;
 
 
 
@@ -156,7 +158,7 @@ void BorrowRecordManager::returnBook(){
 
 
         if(Memberptr->getBorrowedBooks() != 0){
-            auto borrowRecordsOfMember = getBorrowedBooksRecord(MemberId);
+            borrowRecordsOfMember = getBorrowedBooksRecord(MemberId);
 
             std::cout << "Member found: ";
             Memberptr->display();
@@ -166,7 +168,7 @@ void BorrowRecordManager::returnBook(){
                 std::cout << i << ". Title : " << src->getTitle() << ", BookId : " << src->getID() << " .\n";
                 ++i;
             }
-            
+
         }else{
             std::cout << "Member found: ";
             Memberptr->displayOneLine();
@@ -186,32 +188,14 @@ void BorrowRecordManager::returnBook(){
         return;
     }
 
-    std::string bookId = getIdFromUser("Enter Book ID : "); //for book ID
-    std::cout << "searching for Book ID: " << bookId << std::endl;
-    auto borrowedBook = BorrowRecords.find(bookId);
-    if(borrowedBook != BorrowRecords.end()){
-        if(borrowedBook->second != MemberId){
-            std::cout << "This book is not borrowed by \""<< Memberptr->getName() << "\"" << std::endl;
-            std::cout << "press <Enter> to continue...";
-            std::cin.get();
-            std::cout << "Returning back to menu." << std::endl;
-            std::this_thread::sleep_for(std::chrono::seconds(1));
-            return;
-        }
-    }else{
-        std::cout << "No Borrowed book found with ID: " << bookId << std::endl;
-        std::cout << "press <Enter> to continue...";
-        std::cin.get();
-        std::cout << "Returning back to menu." << std::endl;
-        std::this_thread::sleep_for(std::chrono::seconds(1));
-        return;
-    }
-    auto Bookptr = books.findBookById(bookId);
+    returnBookIndex = getValidInput(("Enter the number of the book you want to return (1-" 
+                        + std::to_string(borrowRecordsOfMember.size()) + "): "), 1, static_cast<int>(borrowRecordsOfMember.size()));
+    --returnBookIndex; // Convert to 0-based index
 
     //if we reach here, the book is ready to return
-    BorrowRecords.erase(bookId);
-    Bookptr->setBorrowedStatus(false);
-    Memberptr->decrementBorrowedBooks();
+    BorrowRecords.erase(borrowRecordsOfMember[returnBookIndex]->getID());
+    borrowRecordsOfMember[returnBookIndex]->setBorrowedStatus(false);
+    members.findMemberById(MemberId)->decrementBorrowedBooks();
     std::cout << "Book returned successfully." << std::endl;
     std::cout << "press <Enter> to continue...";
     std::cin.get();
