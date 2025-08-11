@@ -156,19 +156,13 @@ void BookManager::viewBooks(){
     }
 }
 
-void BookManager::viewBooksById(bool indirectCall,std::string_view PassedID) {
+void BookManager::viewBooksById(bool indirectCall) {
     if(!indirectCall){
         cleanscreen();
         std::cout << "A Book ID is formed by taking the first letters of the Book Title and Author's name, followed by a unique four-digit number (e.g., AB1134)." << std::endl;
     }
 
-    std::string BookID;
-
-    if(PassedID.empty()){
-        BookID = getIdFromUser("Enter Book ID : ");
-    }else{
-        BookID = PassedID;
-    }
+    std::string BookID = getIdFromUser("Enter Book ID : ");
 
     auto Bookptr = findBookById(BookID);
 
@@ -177,16 +171,13 @@ void BookManager::viewBooksById(bool indirectCall,std::string_view PassedID) {
         Bookptr->display();
         std::cout << std::string(40,'-') << std::endl;
 
-        if(PassedID.empty()){
-            std::cout << "would you like to view more Books[y,n] ? (default: y) : ";
-            askforTryAgain([&]() {viewBooksById(true);});
-        }
+        std::cout << "would you like to view more Books[y,n] ? (default: y) : ";
     }else{
         std::cout << "There is no Book with ID : " << BookID << std::endl;
         std::cout << "would you like to try again with diffrent Book ID[y,n] ? (default: y) : ";
-        askforTryAgain([&]() {viewBooksById(true);});
     }
 
+    askforTryAgain([&]() {viewBooksById(true);});
 }
 
 void BookManager::viewBooksByAuthor() {
@@ -247,12 +238,6 @@ void BookManager::viewallBooks() {
 }
 
 void BookManager::deleteBook() {
-    if(Books.empty()){
-        std::cout << "No books available to delete." << std::endl;
-        std::cout << "Returning to book menu." << std::endl;
-        std::this_thread::sleep_for(std::chrono::seconds(1));
-        return;
-    }
     cleanscreen();
     std::cout << "Enter the ID of the book you want to delete." << std::endl;
     std::string bookId = getIdFromUser("Book ID : ");
