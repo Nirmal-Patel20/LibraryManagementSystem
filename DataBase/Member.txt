@@ -1,4 +1,4 @@
-Elon Mask,E3360,0
+Elon Mask,E3360,1
 Robert Greene,R4545,0
 Aizan Sama,A6969,3
 Ichigo Kurasaki,I6345,0
