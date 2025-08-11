@@ -10,7 +10,7 @@
 class Member {
     std::string m_name{"None"};
     std::string m_Member_ID{"None"};
-    int m_borrowedBooks{0};
+    int m_borrowedBooksCount{0};
 
 public : 
     Member () = default;

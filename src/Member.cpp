@@ -13,19 +13,19 @@ std::string Member::getID () const {
 }
 
 int Member::getBorrowedBooksCount() const {
-    return m_borrowedBooks;
+    return m_borrowedBooksCount;
 }
 
 void Member::incrementBorrowedBooksCount() {
-    ++m_borrowedBooks;
+    ++m_borrowedBooksCount;
 }
 
 void Member::decrementBorrowedBooksCount() {
-    --m_borrowedBooks;
+    --m_borrowedBooksCount;
 }
 
 std::ostream& operator<< (std::ostream& os,const Member& src){
-    os << src.m_name << "," << src.m_Member_ID << "," << src.m_borrowedBooks;
+    os << src.m_name << "," << src.m_Member_ID << "," << src.m_borrowedBooksCount;
     return os;
 }
 
@@ -38,20 +38,20 @@ std::istream& operator>> (std::istream& is,Member& src){
 
         std::getline(iss,src.m_Member_ID,',');
 
-        iss >> src.m_borrowedBooks;
+        iss >> src.m_borrowedBooksCount;
     }
 
     return is;
 }
 
 void Member::displayOneLine () const {
-    std::cout << "Name : " << m_name << ", ID : " << m_Member_ID << ", Borrowed Books : " << m_borrowedBooks << std::endl;
+    std::cout << "Name : " << m_name << ", ID : " << m_Member_ID << ", Borrowed Books : " << m_borrowedBooksCount << std::endl;
 }
 
 void Member::display() const {
     std::cout << "Name : " << m_name << ", ID : " << m_Member_ID << ", Borrowed status : ";
-    if(m_borrowedBooks > 0) {
-        std::cout << m_borrowedBooks << std::endl;
+    if(m_borrowedBooksCount > 0) {
+        std::cout << m_borrowedBooksCount << std::endl;
         std::cout << "Borrowed Books: \n";
         //MemberManager handles the display of borrowed books
     } else {
