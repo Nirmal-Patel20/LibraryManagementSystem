@@ -5,6 +5,7 @@
 #include <chrono>
 #include <thread>
 
+// Include full headers here because LibraryManager owns full objects of these classes
 #include "BookManager.h"
 #include "MemberManager.h"
 #include "BorrowRecordManager.h"

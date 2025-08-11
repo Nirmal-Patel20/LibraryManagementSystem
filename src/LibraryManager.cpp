@@ -1,6 +1,7 @@
 #include "LibraryManager.h"
 
 LibraryManager::LibraryManager() : borrowRecords(books, members) {
+    members.setBorrowRecordManager(&borrowRecords);
     checkFiles();
     // Load data from files
     books.LoadFile();
