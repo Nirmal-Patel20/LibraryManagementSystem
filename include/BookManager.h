@@ -35,7 +35,7 @@ public :
             void viewBooksByTitle();
             void viewallBooks();
         void deleteBook();
-        void availableBooks();
+        void availableBooks(bool indirectCall = false);
         void borrowedBook();
 
     // Book Operations logic

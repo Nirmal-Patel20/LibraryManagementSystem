@@ -273,7 +273,7 @@ void BookManager::deleteBook() {
     }
 }
 
-void BookManager::availableBooks() {
+void BookManager::availableBooks(bool indirectCall) {
     cleanscreen();
     std::cout << "Searching Available Books:" << std::endl;
     std::this_thread::sleep_for(std::chrono::seconds(2));
@@ -290,10 +290,12 @@ void BookManager::availableBooks() {
         std::cout << "No available books." << std::endl;
     }
 
-    std::cout << "press <Enter> to continue...";
-    std::cin.get();
-    std::cout << "Returning to Book menu." << std::endl;
-    std::this_thread::sleep_for(std::chrono::seconds(1));
+    if(!indirectCall){
+        std::cout << "press <Enter> to continue...";
+        std::cin.get();
+        std::cout << "Returning to Book menu." << std::endl;
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+    }
 }
 
 void BookManager::borrowedBook() {
