@@ -34,7 +34,8 @@ public :
         void returnBook();
         //void borrowRecord(std::string_view MemberId = "Not given");
 
-    
+    // Helper functions
+    std::vector<Book*> getBorrowedBooksRecord(const std::string& MemberId);
 };
 
 #endif // BorrowRecordManager_H

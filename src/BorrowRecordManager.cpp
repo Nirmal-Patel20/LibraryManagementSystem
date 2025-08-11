@@ -146,10 +146,10 @@ void BorrowRecordManager::returnBook(){
 
     if(Memberptr != nullptr){
 
-        auto it = std::find_if(BorrowRecords.begin(), BorrowRecords.end(),
-                    [&MemberId](const auto& record) { return record.second == MemberId; });
 
-        if(it != BorrowRecords.end()){
+        if(Memberptr->getBorrowedBooks() != 0){
+            auto borrowRecordsOfMember = getBorrowedBooksRecord(MemberId);
+
             std::cout << "Member found: ";
             Memberptr->display();
         }else{
@@ -202,4 +202,17 @@ void BorrowRecordManager::returnBook(){
     std::cin.get();
     std::cout << "Returning back to menu." << std::endl;
     std::this_thread::sleep_for(std::chrono::seconds(1));
+}
+
+std::vector<Book*> BorrowRecordManager::getBorrowedBooksRecord(const std::string& MemberId){
+
+    std::vector<Book*> Bookptr;
+    
+    for(const auto& src : BorrowRecords){
+        if(src.second == MemberId){
+            Bookptr.emplace_back(books.findBookById(src.first));
+        }
+    }
+
+    return Bookptr;
 }
