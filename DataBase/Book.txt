@@ -1,4 +1,4 @@
-48 laws of power,Robert Greene,LR4545,1
+48 laws of power,Robert Greene,LR4545,0
 The art of seduction,Robert Greene,TR1236,1
 Harry poter,J K Rowling,HJ4589,0
 Iron man,Bob layton,IB4569,0
