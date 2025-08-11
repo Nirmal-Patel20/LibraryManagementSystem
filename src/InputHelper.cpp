@@ -137,6 +137,8 @@ void askforTryAgain(std::function<void()> callfunction){
     if(choice == 'Y'){
         callfunction();
     } else {
+        std::cout << "press <Enter> to continue...";
+        std::cin.get();
         std::cout << "Returning back to menu." << std::endl;
         std::this_thread::sleep_for(std::chrono::seconds(1));
     }
