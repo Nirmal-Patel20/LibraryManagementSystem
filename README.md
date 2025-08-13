@@ -140,10 +140,10 @@ cmake --build build/ninja-release
 
  - **Load Data** from `DataBase/`.  
  -  **Main Menu**  
-   - 1️⃣ Book Menu 
-   - 2️⃣ Member Menu 
-   - 3️⃣ Borrow Menu
-   - 0️⃣ Exit  
+    - 1️⃣ Book Menu 
+    - 2️⃣ Member Menu 
+    - 3️⃣ Borrow Menu
+    - 0️⃣ Exit  
  - **In-Memory Changes** happen during runtime.  
  - **Save & Exit** writes all changes to files.
 
