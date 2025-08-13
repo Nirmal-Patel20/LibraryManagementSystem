@@ -138,14 +138,14 @@ cmake --build build/ninja-release
 
 6. ### 🖥 Program Flow
 
-- **Load Data** from `DataBase/`.  
-- **Main Menu**  
+ - **Load Data** from `DataBase/`.  
+ -  **Main Menu**  
    - 1️⃣ Book Menu 
    - 2️⃣ Member Menu 
    - 3️⃣ Borrow Menu
    - 0️⃣ Exit  
-- **In-Memory Changes** happen during runtime.  
-- **Save & Exit** writes all changes to files.
+ - **In-Memory Changes** happen during runtime.  
+ - **Save & Exit** writes all changes to files.
 
 > [!WARNING] If the folder DataBase does not exist in the current directory, the program will terminate immediately to prevent inconsistent or incomplete data states.
 
