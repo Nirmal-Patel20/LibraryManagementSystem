@@ -38,7 +38,8 @@ Features cross-manager access using pointers & references to avoid code duplicat
 ---
 
 ## 📁 Project Structure
-```LibraryManagementSystem/
+```
+LibraryManagementSystem/
 ├── DataBase/ 
 │   ├── Book.txt 
 │   ├── Member.txt 
