@@ -167,11 +167,6 @@ cmake --build build/ninja-release
 
 ---
 
-## 🔐 GitHub Setup
-- Git tracked .txt files store student data (data/students.txt)
-- `.gitignore` used to exclude build files
-- Modular layout for clean version control
-
 ## 📢 Status
 >Project completed as a learning exercise. No further development planned.
 
