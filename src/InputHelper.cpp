@@ -35,7 +35,7 @@ std::string getValidString (const std::string& prompt){
             return Input;
         }
 
-        std::cout << "Invalid Input : " << Input << "Input maybe empty" <<  std::endl;
+        std::cout << "Invalid Input : " << Input << " Input maybe empty" <<  std::endl;
         std::cout << "Please try again : ";
     }
 }
@@ -56,6 +56,14 @@ std::string getValidID(const std::string& prompt){
         std::cout << "Invalid Input: \"" << ID  << "\". ID must be 4 numbers (e.g., 1234)." << std::endl;
         std::cout << "Please try again : ";
     }
+}
+
+bool isValidBookID(const std::string ID){
+    return ID.length() == 6 && std::all_of(ID.begin(), ID.end(), ::isalnum) && std::isalpha(ID[0]) && std::isalpha(ID[1]);
+}
+
+bool isValidMemberID(const std::string ID){
+    return ID.length() == 5 && std::all_of(ID.begin(), ID.end(), ::isalnum) && std::isalpha(ID[0]);
 }
 
 std::string getIdFromUser(const std::string& prompt,bool callByMemberManager) {

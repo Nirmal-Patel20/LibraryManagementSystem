@@ -56,6 +56,10 @@ std::string getValidString (const std::string& prompt);
 
 std::string getValidID(const std::string& promts);
 
+bool isValidBookID(const std::string ID);
+
+bool isValidMemberID(const std::string ID);
+
 std::string getIdFromUser(const std::string& prompt, bool callByMemberManager = false);
 
 char extractInitial(const std::string& str, char fallback = 'X');
