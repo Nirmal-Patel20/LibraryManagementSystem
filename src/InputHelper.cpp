@@ -72,20 +72,21 @@ std::string getIdFromUser(const std::string& prompt,bool callByMemberManager) {
     while (true) {
         std::getline(std::cin, id);
 
-        if(callByMemberManager == false){
-            if (id.length() == 6 && std::all_of(id.begin(), id.end(), ::isalnum)){
-                if(std::isalpha(*id.begin()) && std::isalpha(*(++id.begin()))){
-                    *id.begin() = std::toupper(*id.begin());
-                    *(++id.begin()) = std::toupper(*(++id.begin()));
-                    return id;
-                }        
-            }
-            std::cout << "Invalid Book ID. Please enter a valid alphanumeric ID (e.g., LH1234).\n";
-        }else{
-            if (id.length() == 5 && std::all_of(id.begin(), id.end(), ::isalnum) && std::isalpha(*id.begin())){
-                *id.begin() = std::toupper(*id.begin());
+        if(!callByMemberManager){
+            if(isValidBookID(id)){
+                id[0] = std::toupper(id[0]);
+                id[1] = std::toupper(id[1]);
                 return id;
             }
+
+            std::cout << "Invalid Book ID. Please enter a valid alphanumeric ID (e.g., LH1234).\n";
+
+        }else{
+            if(isValidMemberID (id)){
+                id[0] = std::toupper(id[0]);
+                return id;
+            }
+            
             std::cout << "Invalid Book ID. Please enter a valid alphanumeric ID (e.g., L1234).\n";
         }
 
