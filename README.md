@@ -8,7 +8,7 @@ Features cross-manager access using pointers & references to avoid code duplicat
 
 ## 📌 Purpose
 
-- This project is a cleaner, more maintainable successor to my earlier **tudent Management System**(Link : https://github.com/Nirmal-Patel20/StudentManagementSystem).
+- This project is a cleaner, more maintainable successor compared to my earlier **student Management System** project(Link : https://github.com/Nirmal-Patel20/StudentManagementSystem).
 - The StudentManagementSystem was functional but messy, with limited modularity and poor separation of concerns.
 - This new version focuses on:
 
