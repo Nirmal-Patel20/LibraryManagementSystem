@@ -74,16 +74,25 @@ LibraryManagementSystem/
 
 ```bash
 g++ src/*.cpp -o LibraryManagementSystem
-./StudentApp
+./LibraryManagementSystem
 ```
 > [!caution]
 > Make sure your terminal path is inside the project root(..\LibraryManagementSystem).
 
 ### using g++(window)
+```bash
+g++ src/*.cpp -o LibraryManagementSystem
+LibraryManagementSystem.exe
+```
+> [!caution]
+> Make sure your terminal path is inside the project root(..\LibraryManagementSystem).
+
+### using Cmake(Linux/macOS/Window)(Recommended)
+
 
 ```bash
 g++ src/*.cpp -o LibraryManagementSystem
-StudentApp.exe
+LibraryManagementSystem.exe
 ```
 > [!caution]
 > Make sure your terminal path is inside the project root(..\LibraryManagementSystem).
